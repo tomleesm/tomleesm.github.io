@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  blog:
+    image: klakegg/hugo:ext-alpine
+    volumes:
+      - .:/src
+    ports:
+      - "127.0.0.1:1313:1313"
+    command: serve
+    restart: always
