@@ -18,6 +18,14 @@ theme = "DoIt"
   defaultTheme = "black"
   # DoIt 新增 | 0.2.11 开启 PWA 支持
   enablePWA = true
+  # DoIt 新增 | 0.2.0 网站分析配置
+  [params.analytics]
+    enable = true
+    # Google Analytics
+    [params.analytics.google]
+      id = "G-8QMB8ZHPJQ"
+      # 是否匿名化用户 IP
+      anonymizeIP = true
   [params.page]
     # DoIt 更改 | 0.2.0 评论系统设置
     [params.page.comment]
