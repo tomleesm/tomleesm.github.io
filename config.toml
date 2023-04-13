@@ -26,11 +26,11 @@ theme = "DoIt"
       [params.page.comment.utterances]
         enable = true
         # owner/repo
-        repo = ""
-        issueTerm = "pathname"
+        repo = "tomleesm/tomleesm.github.io"
+        issueTerm = "title"
         label = ""
+        darkTheme = "dark-blue"
         lightTheme = "github-light"
-        darkTheme = "github-dark"
     [params.page.toc]
       # 是否使用目录
       enable = true
