@@ -9,7 +9,7 @@ tags:
 toc: false
 authors:
   - Tom
-lightgallery: true
+lightgallery: false
 draft: true
 ---
 顯示在首頁的摘要
