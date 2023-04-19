@@ -10,6 +10,9 @@ title = "Tom 除錯中"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "DoIt"
+# lastmod 最後修改時間預設讀取 Git commit 的時間
+# 設定 enableGitInfo = true 以啟用
+enableGitInfo = true
 
 [params]
   # DoIt 主题版本
