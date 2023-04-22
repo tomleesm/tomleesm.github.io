@@ -150,7 +150,7 @@ enableGitInfo = true
     duration = 0
     # DoIt 新增 | 0.2.7 Cookie 许可配置
   [params.cookieconsent]
-    enable = true
+    enable = false
     # 用于 Cookie 许可横幅的文本字符串
     [params.cookieconsent.content]
       message = ""
