@@ -38,11 +38,11 @@ C0 <-- C1 <-- C2
 ```
 
 ```
-                 C4 <-- [master]
+                  C4 -- [master]
                 /    \
 C0 <-- C1 <-- C2      C5 -- [experiment]
                 \    /
-                 C3
+                  C3
 ```
 
 `git rebase master`：
@@ -52,11 +52,11 @@ C0 <-- C1 <-- C2      C5 -- [experiment]
 以 C4 為基礎，把 C2 到 C3 的改變 (第 4 行新增 3) 改成移到 C4 上做(此時 C4 檔案內容是 5 1 2)，於是產生 C3'。重點是改寫歷史，C3 落單了，產生 C3'，分支 experiment 從指向 C3 改成指向 C3'。C3 會在 git 執行 gc 時清除掉。檔案 c 的內容和上面的 C5 是一樣的(5 1 2 3)。分支結果如下，為了方便和上面比較所以畫成這樣，一般會顯示成一直線。
 
 ```
-                C4 -- [master]
-               /  \
-C0 <-- C1 <-- C2  C3' -- [experiment]
+                 C4 -- [master]
+               /   \
+C0 <-- C1 <-- C2   C3' -- [experiment]
 
-               C3
+                C3
 ```
 
 rebase 指令的一般形式是 `git rebase [基礎分支] [被合併的分支]`，所以上述的 rebase 等於指令 `git rebase master experiment`。如果省略被合併的分支，則使用當前分支。
