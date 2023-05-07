@@ -2,14 +2,14 @@
 title: "GitHub 預設分支 master 改名為 main"
 date: 2023-05-08T06:32:39+08:00
 categories:
-  - 分類
+  - 工具筆記
 tags:
-  - 標籤
+  - git
 toc: false
 authors:
   - Tom
 lightgallery: false
-draft: true
+draft: false
 ---
 今天把[wiki.php](https://github.com/tomleesm/wiki.php)的預設分支從 master 改成 main，然後 GitHub 就顯示以下的說明：
 
