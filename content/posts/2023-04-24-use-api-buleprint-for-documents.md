@@ -1,11 +1,6 @@
 ---
 title: "使用 API Blueprint 寫文件"
 date: 2023-04-24T23:44:52+08:00
-categories:
-  - 工具筆記
-tags:
-  - API
-  - 文件
 toc: true
 authors:
   - Tom

@@ -1,8 +1,6 @@
 ---
 title: "[好書推薦]為什麼他接的案子比我多"
 date: 2023-07-25T19:00:18+08:00
-categories:
-  - 好書推薦
 toc: false
 authors:
   - Tom

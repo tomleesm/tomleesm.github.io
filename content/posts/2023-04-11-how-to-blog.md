@@ -1,10 +1,6 @@
 ---
 title: 怎麼寫部落格？
 date: 2023-04-11T17:00:00+08:00
-categories:
-  - 部落格
-tags:
-  - 寫作
 authors:
   - Tom
 toc: true

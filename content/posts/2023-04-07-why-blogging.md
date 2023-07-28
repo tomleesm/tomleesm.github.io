@@ -1,10 +1,6 @@
 ---
 title: 為什麼寫部落格？
 date: 2023-04-07T16:00:00+08:00
-categories:
-  - 部落格
-tags:
-  - 寫作
 authors:
   - Tom
 toc: false

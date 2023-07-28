@@ -1,11 +1,6 @@
 ---
 title: "PostgreSQL 筆記"
 date: 2023-04-24T06:26:31+08:00
-categories:
-  - 語法筆記
-tags:
-  - PostgreSQL
-  - 資料庫
 toc: true
 authors:
   - Tom

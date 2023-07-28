@@ -1,10 +1,6 @@
 ---
 title: "GitHub 預設分支 master 改名為 main"
 date: 2023-05-08T06:32:39+08:00
-categories:
-  - 工具筆記
-tags:
-  - git
 toc: false
 authors:
   - Tom

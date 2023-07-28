@@ -1,11 +1,6 @@
 ---
 title: "專案失敗最常見的原因？時間太多 x 時間不是自己的"
 date: 2023-05-06T11:17:51+08:00
-categories:
-  - 專案管理
-tags:
-  - 時間管理
-  - 專案管理
 toc: false
 authors:
   - Tom

@@ -1,12 +1,6 @@
 ---
 title: "使用 Swagger 寫文件"
 date: 2023-04-24T23:39:11+08:00
-categories:
-  - 工具筆記
-tags:
-  - Swagger
-  - API
-  - 文件
 toc: true
 authors:
   - Tom

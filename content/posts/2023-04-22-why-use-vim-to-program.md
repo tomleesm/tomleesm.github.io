@@ -1,10 +1,6 @@
 ---
 title: "我為什麼想不開用 Vim 寫程式？"
 date: 2023-04-22T18:28:51+08:00
-categories:
-  - 人生故事
-tags:
-  - vim
 toc: false
 authors:
   - Tom

@@ -1,10 +1,6 @@
 ---
 title: "Git rebase 是什麼？"
 date: 2023-04-26T13:37:19+08:00
-categories:
-  - 基本觀念
-tags:
-  - git
 toc: false
 authors:
   - Tom

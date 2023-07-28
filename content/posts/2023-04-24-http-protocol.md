@@ -1,12 +1,6 @@
 ---
 title: "HTTP 通訊協議簡介"
 date: 2023-04-24T05:39:19+08:00
-categories:
-  - 基本觀念
-tags:
-  - http
-  - session
-  - cookie
 toc: true
 authors:
   - Tom

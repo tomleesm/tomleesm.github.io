@@ -1,11 +1,6 @@
 ---
 title: "RESTful API 簡介"
 date: 2023-04-24T23:31:58+08:00
-categories:
-  - 基本觀念
-tags:
-  - RESTful
-  - API
 toc: true
 authors:
   - Tom

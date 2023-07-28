@@ -1,10 +1,6 @@
 ---
 title: "資料庫正規化 - 以魔法學校課程為例"
 date: 2023-04-24T05:56:07+08:00
-categories:
-  - 基本觀念
-tags:
-  - 資料庫
 toc: true
 authors:
   - Tom
