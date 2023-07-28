@@ -1,15 +1,11 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-categories:
-  - 分類
-tags:
-  - 標籤
 toc: false
 authors:
   - Tom
 lightgallery: false
-draft: true
+draft: false
 ---
 顯示在首頁的摘要
 
