@@ -17,3 +17,11 @@
 #toc-auto {
   left: 76%;
 }
+/* 水平線像 medium 那樣 */
+.single .content hr {
+  margin: 2rem auto;
+  max-width: 10%;
+}
+[theme=black] .single .content hr {
+  border-top: 3px dashed #f0f0f0;;
+}
