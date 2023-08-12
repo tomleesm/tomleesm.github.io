@@ -14,12 +14,13 @@ draft: false
 3. 步驟翻譯成程式碼
 4. 電腦執行程式碼
 
-我覺得第二點最困難，業界還給這種轉換能力取名 Computational Thinking，不過我怎麼看都覺得類似之前文章[思考的方法](/2023-04-27-thinking)提到的數學思考。我不前最缺少的就是這種思考解題能力，所以解 UVa 題目，把解題過程和程式碼都寫成文章，以為憑證。
+我覺得第二點最困難，業界還給這種轉換能力取名 Computational Thinking，不過我怎麼看都覺得類似之前文章[思考的方法](/2023-04-27-thinking)提到的數學思考。我目前最缺少的就是這種思考解題能力，所以解 UVa 題目[^1]，把解題過程和程式碼都寫成文章，以為憑證。
 
-第三點所需的程式語言和框架語法並不難學，前幾天複習 PHP 和 Laravel 官方文件，其實大多還記得。UVa 題目最後的程式碼用 Python 語法，因為 PHP 適合寫網站，不是終端機程式[^1]，而且最近學了一點 Python，正好寫題目來練習。
+第三點所需的程式語言和框架語法並不難學，前幾天複習 PHP 和 Laravel 官方文件，其實大多還記得。UVa 題目最後的程式碼用 Python 語法，因為 PHP 適合寫網站，不是終端機程式[^2]，而且最近學了一點 Python，正好寫題目來練習。
 
 - [Q100 3n + 1](/uva-online-judge/q100-3n-1)
 - [Q272 TeX Quotes](/uva-online-judge/q272-tex-quote)
 - [Q458 The Decoder](/uva-online-judge/q458-the-decoder)
 
-[^1]: 我知道有 [STDIN](https://www.php.net/manual/en/features.commandline.io-streams.php) 這個東西，只是...
+[^1]: [UVa線上解題系統](https://zh.wikipedia.org/zh-tw/UVa%E7%B7%9A%E4%B8%8A%E8%A7%A3%E9%A1%8C%E7%B3%BB%E7%B5%B1)
+[^2]: 我知道有 [STDIN](https://www.php.net/manual/en/features.commandline.io-streams.php) 這個東西，只是...
