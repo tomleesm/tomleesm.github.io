@@ -276,6 +276,17 @@ enableGitInfo = true
     # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
     title = ""
     weight = 2
+  [[menu.main]]
+    identifier = "uva-online-judge"
+    # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+    pre = ""
+    # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+    post = ""
+    name = "解 UVa 線上解題系統"
+    url = "/why-uva-problem"
+    # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
+    title = ""
+    weight = 3
 
 # Hugo 解析文档的配置
 [markup]
