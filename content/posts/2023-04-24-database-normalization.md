@@ -35,7 +35,7 @@ draft: false
 這樣要過濾出有科目不及格的學生及其科目，可以用以下的 SQL
 
 ``` sql
-SELECt 姓名, 課程, 必選修, 教授
+SELECT 姓名, 課程, 必選修, 教授
 FROM 魔法學校選課資料
 WHERE 及格 = '不及格'
 ```
@@ -54,7 +54,7 @@ WHERE 及格 = '不及格'
 選擇 6 號資料
 
 ``` sql
-SELECt *
+SELECT *
 FROM 魔法學校選課資料
 WHERE 編號 = 6
 ```
