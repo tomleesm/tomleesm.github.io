@@ -22,6 +22,8 @@ draft: false
 - [Q272 TeX Quotes](/uva/q272-tex-quote)
 - [Q458 The Decoder](/uva/q458-the-decoder)
 - [Q476 Points in Figures: Rectangles](/uva/q476-points-in-figures-rectangles)
+- [Q477 Points in Figures: Rectangles and Circles](/uva/q477-points-in-figures-rectangles-and-circles)
+- [Q488 Triangle Wave](/uva/q488-triangle-wave)
 
 [^1]: [UVa線上解題系統](https://zh.wikipedia.org/zh-tw/UVa%E7%B7%9A%E4%B8%8A%E8%A7%A3%E9%A1%8C%E7%B3%BB%E7%B5%B1)
 [^2]: 我知道有 [STDIN](https://www.php.net/manual/en/features.commandline.io-streams.php) 這個東西，只是...
