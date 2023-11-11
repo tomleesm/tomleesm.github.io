@@ -15,9 +15,4 @@ draft: false
 
 先求有，再求好。先習慣每天生出一個網站，就算是初學者程度的網站也行，等你能輕鬆完成一個網站，自然會自我要求網站的品質，慢慢導入一堆東西：ER model、腳本自動佈署、user story、Scrum、單元測試、TDD、設計模式等
 
-目前想到的網站主題有：
-
-1. 待辦事項
-2. 部落格
-3. 圖床
-4. 聊天室
+[迷你網站主題](https://docs.google.com/spreadsheets/d/1ISsRRTcwwQH48vDGM9vRvgKZUW_daaeNrBM6JA0TkRY/edit#gid=0)
