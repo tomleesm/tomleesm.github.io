@@ -87,6 +87,11 @@ docker compose exec php bash
 docker compose logs -f nginx
 ```
 
+新增 backend 容器並執行指令 `php -m` 後，刪除容器。`php -m` 指令顯示目前安裝的 php extension
+
+``` bash
+docker compose run --rm backend php -m
+```
 ## 基本的 LEMP 環境
 
 ### Nginx
@@ -266,7 +271,262 @@ character-set-server = utf8mb4
 新增檔案 `.env`，設定 MySQL root 密碼
 
 ```
-MYSQL_ROOT_PASSWORD = '密碼'
+MYSQL_ROOT_PASSWORD='密碼'
 ```
 
-## 前端(Vue.js) 與後端 (Laravel)
+## 前端 Vue.js 與後端 Laravel
+
+### 後端 Laravel
+
+#### 建立所需的 image 和權限
+
+如果從前面的設定一路到此，需要刪除 `.docker/php` 目錄，以及檔案 `.docker/nginx/conf.d/php.conf` 和 `src/index.php`，目錄結構應該從以下那樣開始
+
+```
+├── .docker/
+│   ├── mysql/
+│   │   └── my.cnf
+│   └── nginx/
+│       └── conf.d/
+├── src/
+├── .env
+└── docker-compose.yml
+```
+
+修改 `docker-compose.yaml` 如下
+``` yaml
+version: '3.8'
+
+# Services
+services:
+
+  # Nginx Service
+  nginx:
+    image: nginx:1.21-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./src/backend:/var/www/backend
+      - ./.docker/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - backend
+
+  # Backend Service
+  backend:
+    build:
+      context: ./src/backend
+      args:
+        HOST_UID: $HOST_UID
+    working_dir: /var/www/backend
+    volumes:
+      - ./src/backend:/var/www/backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # MySQL Service
+  mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      # 設定使用 .env 的 MYSQL_ROOT_PASSWORD 值做為密碼
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: demo
+    volumes:
+      - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - mysqldata:/var/lib/mysql
+    # 開放本機端的 port 3306 來查詢 MySQL
+    ports:
+      - 127.0.0.1:3306:3306
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      interval: 5s
+      retries: 10
+
+# Volumes
+volumes:
+  mysqldata:
+```
+
+和 MySQL 比較，修改的地方有
+
+- nginx 的 `volumes`：`- ./src:/var/www/php` 改為 `- ./src/backend:/var/www/backend`
+- nginx 的 `depends_on`：`php` 改成 `backend`
+- php 整個改成 backend
+
+在 `.docker/nginx/conf.d` 目錄新增檔案 `backend.conf`，填入以下內容
+
+```
+server {
+    listen      80;
+    listen      [::]:80;
+    root        /var/www/backend/public;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass  backend:9000;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include       fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+新增 `src/backend` 目錄
+
+``` bash
+mkdir -p src/backend
+```
+
+在 `src/backend` 目錄內新增 `Dockerfile`，並填入以下內容
+
+``` yaml
+FROM php:8.1-fpm-alpine
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql bcmath
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Create user based on provided user ID
+ARG HOST_UID
+RUN adduser --disabled-password --gecos "" --uid $HOST_UID demo
+
+# Switch to that user
+USER demo
+```
+
+使用 [multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds) 方式直接複製檔案來安裝 Composer
+
+`Dockerfile` 新增使用者 demo，並切換到 demo，這是為了讓之後新增的 Laravel 檔案權限是一般使用者，否則預設是 root。
+
+執行以下的指令，顯示目前本機的使用者 uid
+
+``` bash
+id -u
+```
+
+然後在 `.env` 中設定環境變數
+
+```
+# 假設 id -u 的結果是 1000
+HOST_UID=1000
+```
+
+最後執行 `docker compose build backend` 建立 image
+
+#### 新增 Laravel 專案
+
+新增 Laravel 專案 tmp，然後把 tmp 目錄內的檔案移出來，這樣 `src/backend/` 目錄內才會是 Laravel 檔案
+
+``` bash
+docker compose run --rm backend composer create-project --prefer-dist laravel/laravel tmp "10.*"
+
+docker compose run --rm backend sh -c "mv -n tmp/.* ./ && mv tmp/* ./ && rm -Rf tmp"
+```
+
+修改 `src/backend/` 目錄的 `.env` 檔案，讓資料庫設定正確
+
+```
+DB_CONNECTION=mysql
+# 不是用 127.0.0.1
+DB_HOST=mysql
+DB_PORT=3306
+# 因為 docker compose 的 MYSQL_DATABASE 設定是 demo
+DB_DATABASE=demo
+DB_USERNAME=root
+# .env 和 src/backend/.env 的 MYSQL_ROOT_PASSWORD 設定值要一樣
+DB_PASSWORD=密碼
+```
+
+執行指令 `docker compose exec backend php artisan migrate` 確認資料庫設定正確
+
+#### OPcache
+
+在 `src/backend` 目錄新增 `.docker` 目錄
+
+``` bash
+mkdir -p src/backend/.docker
+```
+
+在 `src/backend/.docker` 新增 `php.ini` 檔案，填入以下內容
+
+```
+[opcache]
+opcache.enable=1
+opcache.revalidate_freq=0
+opcache.validate_timestamps=1
+opcache.max_accelerated_files=10000
+opcache.memory_consumption=192
+opcache.max_wasted_percentage=10
+opcache.interned_strings_buffer=16
+opcache.fast_shutdown=1
+```
+
+修改 `src/backend` 目錄內的 `Dockerfile` 如下
+
+```
+FROM php:8.1-fpm-alpine
+
+# Install extensions
+RUN docker-php-ext-install pdo_mysql bcmath opcache
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Configure PHP
+COPY .docker/php.ini $PHP_INI_DIR/conf.d/opcache.ini
+
+# Use the default development or production configuration
+ARG APP_ENV
+RUN mv $PHP_INI_DIR/php.ini-$APP_ENV $PHP_INI_DIR/php.ini
+
+# Create user based on provided user ID
+ARG HOST_UID
+RUN adduser --disabled-password --gecos "" --uid $HOST_UID demo
+
+# Switch to that user
+USER demo
+```
+
+`docker-compose.yaml` 需要設定 args APP_ENV
+
+``` yaml
+backend:
+    build:
+      context: ./src/backend
+      args:
+        HOST_UID: $HOST_UID
+        APP_ENV: $APP_ENV
+```
+
+設定 `.env` 
+```
+# development 或是 production
+APP_ENV='development'
+```
+
+最後執行 `docker compose build backend` 建立 image，`docker compose up -d` 新增並啟動容器
+
+執行 `docker compose exec backend php -m` 確認有啟用 `Zend OPcache`
+
+### 前端 Vue.js
