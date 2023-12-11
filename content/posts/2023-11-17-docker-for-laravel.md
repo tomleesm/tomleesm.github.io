@@ -529,6 +529,118 @@ APP_ENV='development'
 
 執行 `docker compose exec backend php -m` 確認有啟用 `Zend OPcache`
 
+#### 安裝 Redis
+
+修改 `src/backend` 目錄內的 `Dockerfile`，新增以下內容
+
+```
+# Install Redis extension
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
+    && pecl install redis 6.0.0 \
+    && docker-php-ext-enable redis
+```
+
+執行 `docker compose build backend` 建立 image
+
+修改 `docker-compose.yaml`，新增以下內容
+
+``` yaml
+# Redis Service
+redis:
+  image: redis:6-alpine
+  command: ["redis-server", "--appendonly", "yes"]
+  volumes:
+    - redisdata:/data
+```
+
+`command` 用來覆蓋容器啟動後的預設指令。Redis 在此是用來執行佇列，最好保存排程紀錄，所以設定成 [Append Only File 模式](https://redis.io/docs/management/persistence/) (`--appendonly` 參數)
+
+需要保存 redis 資料，所以新增一個 volume
+
+``` yaml
+volumes:
+  redisdata:
+```
+
+因為 Redis 是給 backend 容器使用的，所以在 backend `depends_on` 新增以下內容，確保先啟動 Redis 容器
+
+``` yaml
+  depends_on:
+    redis:
+      condition: service_started
+```
+
+修改 `src/backend` 目錄內的 `.env`，redis host 要和資料庫一樣改用 docker 內部別名，所以改成以下這樣
+
+```
+QUEUE_CONNECTION=redis
+REDIS_HOST=redis
+```
+
+執行指令 `docker compose up -d` 新增並啟動容器
+
+#### 使用 multi-stage build 產生另一個 Laravel 容器以執行佇列
+
+接下來會有兩個執行 Laravel 的容器，一個執行一般的 web 請求，另一個執行佇列，因為兩個容器需要的 `Dockerfile` 很類似，所以用以下的方式
+
+修改 `src/backend` 目錄內的 `Dockerfile`，開頭的 `FROM php:8.1-fpm-alpine` 加上 `as backend`，把這一行開始到另一個 FROM 之前的階段取名為 backend
+
+```
+FROM php:8.1-fpm-alpine as backend
+```
+
+以及以 backend 階段為基礎，取新的名稱 worker，在 `Dockerfile` 最底下新增以下的 FROM 和 CMD 內容
+
+```
+FROM backend as worker
+
+# Start worker
+CMD ["php", "/var/www/backend/artisan", "queue:work"]
+```
+`CMD` 指令設定 worker 容器啟動後自動執行 `php artisan queue:work`
+
+修改 `docker-compose.yaml`，新增以下設定
+
+``` yaml
+# Worker Service
+worker:
+  build:
+    context: ./src/backend
+    target: worker
+    args:
+      HOST_UID: $HOST_UID
+      APP_ENV: $APP_ENV
+  working_dir: /var/www/backend
+  volumes:
+    - ./src/backend:/var/www/backend
+  depends_on:
+    - backend
+```
+
+上面的設定和 backend 容器很像，也用 `volume` 同步相同的 Laravel 檔案，唯一不同的是因為共用同一個 `Dockerfile`，所以要用 `target: worker` 指定使用的是 `worker` 階段。
+
+因此 backend 容器也要加上 `target: backend`，指定使用 `backend` 階段
+
+``` yaml
+# Backend Service
+backend:
+  build:
+    context: ./src/backend
+    target: backend
+    args:
+      HOST_UID: $HOST_UID
+      APP_ENV: $APP_ENV
+```
+
+建立兩個 image，所以執行兩個 build
+
+``` bash
+docker compose build backend
+docker compose build worker
+```
+
+最後執行指令 `docker compose up -d` 新增並啟動容器
+
 ### 前端 Vue.js
 
 #### 建立所需的 image 和權限
