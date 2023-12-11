@@ -8,7 +8,7 @@ lightgallery: false
 draft: false
 ---
 
-想要用 Docker 建立 Laravel 環境，於是 (Google "Docker LEMP")[https://www.google.com/search?q=Docker+LEMP&oq=Docker+LEMP]，發現一篇很棒的文章[Docker for local web development, introduction: why should you care?](https://tech.osteel.me/posts/docker-for-local-web-development-introduction-why-should-you-care)。因為不想每次忘記指令都回去看這一系列文章（英文沒那麼好），於是寫筆記。
+想要用 Docker 建立 Laravel 環境，於是 [Google "Docker LEMP"](https://www.google.com/search?q=Docker+LEMP&oq=Docker+LEMP)，發現一篇很棒的文章[Docker for local web development, introduction: why should you care?](https://tech.osteel.me/posts/docker-for-local-web-development-introduction-why-should-you-care)。因為不想每次忘記指令都回去看這一系列文章（英文沒那麼好），於是寫筆記。
 
 ## 安裝 Docker
 
