@@ -530,3 +530,127 @@ APP_ENV='development'
 執行 `docker compose exec backend php -m` 確認有啟用 `Zend OPcache`
 
 ### 前端 Vue.js
+
+#### 建立所需的 image 和權限
+
+`docker-compose.yaml` 填入以下內容
+
+``` yaml
+# Frontend Service
+frontend:
+  build: ./src/frontend
+  working_dir: /var/www/frontend
+  volumes:
+    - ./src/frontend:/var/www/frontend
+  depends_on:
+    - backend
+```
+
+以及在 nginx 的 depends_on 加上 `- frontend`
+
+在 `src` 目錄新增 `frontend` 目錄
+
+``` bash
+mkdir -p src/frontend
+```
+
+然後新增 `Dockerfile` 檔案，填入以下設定
+
+```
+FROM node:20-alpine
+
+USER node
+```
+
+切換到使用者 node，否則新增 Vue.js 專案的檔案權限預設是 root。在 [Docker for local web development, part 3: a three-tier architecture with frameworks](https://tech.osteel.me/posts/docker-for-local-web-development-part-3-a-three-tier-architecture-with-frameworks#the-frontend-application) 沒有如此設定，所以其實會產生問題
+
+執行指令 `docker compose build frontend` 建立 image
+
+#### 新增 Vue.js 專案
+
+新增 Vue.js 專案 tmp，然後把 tmp 目錄內的檔案移出來，這樣 `src/frontend/` 目錄內才會是 Vue.js 檔案
+
+``` bash
+docker compose run --rm frontend yarn create vite tmp --template vue
+
+docker compose run --rm frontend sh -c "mv -n tmp/.* ./ && mv tmp/* ./ && rm -Rf tmp"
+```
+
+安裝 Vue.js 依賴的套件
+
+``` bash
+docker compose run --rm frontend yarn
+```
+
+在 `.docker/nginx/conf.d` 目錄新增 `frontend.conf` 檔案，填入以下設定
+
+```
+server {
+    listen      80;
+    listen      [::]:80;
+
+    location / {
+        proxy_pass         http://frontend:8080;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection 'upgrade';
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header   Host $host;
+    }
+}
+```
+
+上述設定連到 http://localhost ，會把請求轉到 frontend 容器處理，所以後端的 nginx 設定要改成 port 8000，否則會衝突，連到後端 Laravel
+
+修改 `.docker/nginx/conf.d` 目錄內的 `backend.conf` 檔案，把 port 改成 8000
+```
+server {                                                                        
+    listen      8000;                                                            
+    listen      [::]:8000;                                                       
+    root        /var/www/backend/public;    
+
+```
+
+還有 `docker-compose.yaml` 要修改 nginx ports，開放 8000
+
+``` yaml
+  nginx:
+    image: nginx:1.21-alpine
+    ports:
+      - 80:80
+      - 8000:8000
+```
+
+在 `src/frontend` 新增 `vite.config.js` 檔案，填入以下設定，設置好 Vite 的 hot reload
+
+``` javascript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+    plugins: [vue()],
+    server: {
+        host: true,
+        hmr: {port: 80},
+        port: 8080,
+        watch: {
+            usePolling: true
+        }
+    }
+})
+```
+
+修改 `src/frontend` 目錄內的 `Dockerfile` 檔案，新增 `yarn dev` 指令，使容器啟動後自動執行測試環境
+
+```
+FROM node:20-alpine
+
+USER node
+
+# Start application
+CMD ["yarn", "dev"]
+```
+
+修改了 `Dockerfile`，所以要執行指令 `docker compose build frontend` 重建 image
+
+最後執行指令 `docker compose up -d`，用瀏覽器打開 http://localhost 應該可以看到 Vue.js 的歡迎頁面
