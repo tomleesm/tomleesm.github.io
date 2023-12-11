@@ -621,6 +621,10 @@ server {
       - 8000:8000
 ```
 
+因為 nginx 設定成 port 80 直接轉到容器內部網址 http://frontend:8080 （使用 `proxy_pass`），由 Vite 提供 HTTP server，Vue.js 檔案不需要同步到 nginx，但是後端是交給 nginx 作為 HTTP server，轉交 php 請求給 php-fpm（使用 `fastcgi_pass`），php-fpm 會去找設定的 root 目錄中有沒有請求指定的 php 檔案，注意是檔案，不是網址，所以 `src/backend` 目錄的檔案需要同步給 nginx 。
+
+在正式環境，直接打包 JavaScript 檔案，交給 nginx 做為一般的靜態檔案，所以不需要前端容器
+
 在 `src/frontend` 新增 `vite.config.js` 檔案，填入以下設定，設置好 Vite 的 hot reload
 
 ``` javascript
