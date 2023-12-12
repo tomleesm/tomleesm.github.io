@@ -770,3 +770,40 @@ CMD ["yarn", "dev"]
 修改了 `Dockerfile`，所以要執行指令 `docker compose build frontend` 重建 image
 
 最後執行指令 `docker compose up -d`，用瀏覽器打開 http://localhost 應該可以看到 Vue.js 的歡迎頁面
+
+## 排程
+
+文章中推薦使用 [Ofelia](https://hub.docker.com/r/mcuadros/ofelia)，好處是如果要修改執行的週期、容器或指令，只需要修改 `config.ini` 設定，並重新啟動 Ofelia 容器即可。如果用 Linux cron，Google 了一下發現相當麻煩，這篇文章[如何在 Docker 中運行 Cron？](https://meishizaolunzi.com/zh-Hant/cron-in-docker/)可以參考
+
+在 `.docker` 目錄內新增 `scheduler` 目錄
+
+``` bash
+mkdir -p .docker/scheduler
+```
+
+然後在 `scheduler` 目錄內新增檔案 `config.ini`，填入以下設定
+
+```
+[job-exec "Laravel Scheduler"]
+schedule = @every 1m
+container = demo-backend-1
+command = php /var/www/backend/artisan schedule:run
+```
+
+以上設定名稱為 `demo-backend-1` 的容器每分鐘執行一次 `php /var/www/backend/artisan schedule:run` 指令
+
+修改 `docker-compose.yaml`，新增以下內容
+
+``` yaml
+# Scheduler Service
+scheduler:
+  image: mcuadros/ofelia:latest
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./.docker/scheduler/config.ini:/etc/ofelia/config.ini
+  depends_on:
+    - backend
+```
+
+執行 `docker compose up -d` 指令，新增並啟動容器，執行 `docker compose logs -f scheduler` 指令，確認 Ofelia 容器正常運作
+
