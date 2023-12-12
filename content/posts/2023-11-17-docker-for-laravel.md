@@ -1,5 +1,5 @@
 ---
-title: 使用 Docker Compose 建立 Laravel 環境
+title: 使用 Docker Compose 安裝 Laravel 和 Vue.js 環境
 date: 2023-11-17T14:59:47+08:00
 toc: true
 authors:
