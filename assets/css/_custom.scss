@@ -25,3 +25,12 @@
 [theme=black] .single .content hr {
   border-top: 3px dashed #f0f0f0;;
 }
+[theme=black] .single .content code, [theme=black] .single .content pre, [theme=black] .single .content .highlight table, [theme=black] .single .content .highlight tr, [theme=black] .single .content .highlight td {
+  background: transparent;
+}
+[theme=black] .single .content code {
+  color: #d9d9d9;
+}
+.single .content code {
+  color: #272c34;
+}
