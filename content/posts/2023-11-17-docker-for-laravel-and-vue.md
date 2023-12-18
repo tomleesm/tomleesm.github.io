@@ -260,7 +260,7 @@ RUN docker-php-ext-install pdo_mysql
 mkdir -p .docker/mysql/
 ```
 
-在 `docker/mysql/` 內新增檔案 `my.cnf`，並填入以下設定
+在 `.docker/mysql/` 內新增檔案 `my.cnf`，並填入以下設定
 
 ```
 [mysqld]
@@ -280,17 +280,17 @@ MYSQL_ROOT_PASSWORD='密碼'
 
 #### 建立所需的 image 和權限
 
-如果從前面的設定一路到此，需要刪除 `.docker/php` 目錄，以及檔案 `.docker/nginx/conf.d/php.conf` 和 `src/index.php`，目錄結構應該從以下那樣開始
+如果從前面的設定一路到此，需要刪除 `.docker/php` 目錄，以及檔案 `.docker/nginx/conf.d/php.conf` 和 `src/index.php`，目錄結構應該從以下那樣開始(執行 `tree -a .` 指令的結果)
 
 ```
-├── .docker/
-│   ├── mysql/
-│   │   └── my.cnf
-│   └── nginx/
-│       └── conf.d/
-├── src/
+├── .docker
+│   ├── mysql
+│   │   └── my.cnf
+│   └── nginx
+│       └── conf.d
+├── docker-compose.yaml
 ├── .env
-└── docker-compose.yml
+└── src
 ```
 
 修改 `docker-compose.yaml` 如下
@@ -579,7 +579,7 @@ REDIS_HOST=redis
 
 執行指令 `docker compose up -d` 新增並啟動容器
 
-#### 使用 multi-stage build 產生另一個 Laravel 容器以執行佇列
+#### 佇列 queue
 
 接下來會有兩個執行 Laravel 的容器，一個執行一般的 web 請求，另一個執行佇列，因為兩個容器需要的 `Dockerfile` 很類似，所以用以下的方式
 
