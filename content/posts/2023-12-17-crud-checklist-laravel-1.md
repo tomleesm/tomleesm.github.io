@@ -9,7 +9,7 @@ draft: false
 ---
 首先參考[使用 Docker Compose 安裝 Laravel 和 Vue.js 環境](/2023-11-17-docker-for-laravel-and-vue)，安裝到 Laravel 後端。
 
-執行 `docker compose exec backend sh`，連進後端 php 環境（以下稱終端機 backend）
+執行 `docker compose exec backend sh`，連進後端 php 環境
 
 新增 resource controller `PostController`，檔案是 `app\Http\Controllers\PostController.php`
 
@@ -17,7 +17,7 @@ draft: false
 php artisan make:controller PostController  --resource
 ```
 
-另一個終端機(以下稱 editor)，在 host 端切換到 `src/backend` 目錄，在 `routes/web.php` 新增一個 `resource` 路由。刪除預設的 `Route::get('/')` 歡迎頁面那三行
+開另一個終端機，在 host 端切換到 `src/backend` 目錄，在 `routes/web.php` 新增一個 `resource` 路由。刪除預設的 `Route::get('/')` 歡迎頁面那三行
 
 ``` php
 use App\Http\Controllers\PostController;
@@ -27,7 +27,7 @@ Route::resource('posts', PostController::class);
 
 把 `routes/api.php` 內的路由註解起來，這個程式沒有用到 API
 
-在終端機 editor 執行 `php artisan route:list --except-vendor` (不顯示 Laravel 外掛需要的路由)
+執行 `php artisan route:list --except-vendor` 指令(不顯示 Laravel 外掛需要的路由)
 
 會有以下路由（為了 markdown 格式和美觀調整過）
 
