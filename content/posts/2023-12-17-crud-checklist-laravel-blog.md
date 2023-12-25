@@ -41,4 +41,51 @@ Route::resource('posts', PostController::class);
 | DELETE | posts/{post} | posts.destroy | PostController@destroy |
 | GET/HEAD | posts/{post}/edit | posts.edit | PostController@edit |
 
-接下來就只是把上面這個表格的功能和頁面(view)做出來
+## 顯示新增文章表單
+
+用編輯器打開 `PostController`，在 method `create()` 填入以下程式碼，顯示 view `resources/views/posts/create.blade.php`
+
+``` php
+public function create()
+{
+    return view('posts.create');
+}
+```
+
+在瀏覽器執行網址 http://127.0.0.1/posts/create ，會顯示沒有這個 view，所以新增它
+
+``` bash
+mkdir -p resources/views/posts/
+```
+
+用編輯器新增檔案 `resources/views/posts/create.blade.php`，並打開它，填入以下的程式碼
+
+``` html
+<div>
+  <a href="{{ route('posts.index') }}">回到首頁</a>
+</div>
+
+<h1>New Post</h1>
+
+<form method="post" accept-charset="utf-8" action="{{ route('posts.store') }}">
+  @csrf
+  
+  <div>
+    <label for="post_title">Title</label><br>
+    <input type="text" name="post[title]" id="post_title">
+  </div>
+  
+  <div>
+    <label for="post_body">Body</label><br>
+    <textarea name="post[body]" id="post_body"></textarea>
+  </div>
+  
+  <div>
+    <button type="submit">Create Post</button>
+  </div>
+</form>
+```
+
+- `{{ route('posts.store') }}` 呼叫 `route(路由名稱)`，產生 HTML `http://127.0.0.1/posts`
+- `@csrf` ：新增、修改或刪除需要有 CSRF 欄位進行驗證才能執行，否則送出表單會顯示 419 PAGE EXPIRED
+
