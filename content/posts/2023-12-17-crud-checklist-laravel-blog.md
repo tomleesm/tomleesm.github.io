@@ -1,5 +1,5 @@
 ---
-title: CRUD 網站檢查表 - 使用 Laravel (一)
+title: CRUD 網站檢查表 - 使用 Laravel (部落格)
 date: 2023-12-17T20:30:57+08:00
 toc: false
 authors:
