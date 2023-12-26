@@ -19,15 +19,17 @@ sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gp
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 sudo apt update; sudo apt upgrade -y
 
-sudo apt install php8.3-{cli,fpm,pdo,gd,mbstring,curl,bcmath,opcache}
+PHP_VERSION='8.3'
+sudo apt install php$PHP_VERSION-{cli,fpm,common,gd,mbstring,curl,bcmath,opcache}
 ```
 
 ## 設定 PHP-FPM
 
 ``` bash
 # 備份 php-fpm 池設定
-sudo cp /etc/php/8.3/fpm/pool.d/www.conf /etc/php/8.3/fpm/pool.d/www.conf.sample
-sudo vim /etc/php/8.3/fpm/pool.d/www.conf
+sudo cp /etc/php/$PHP_VERSION/fpm/pool.d/www.conf \
+  /etc/php/$PHP_VERSION/fpm/pool.d/www.conf.sample
+sudo vim /etc/php/$PHP_VERSION/fpm/pool.d/www.conf
 ```
 
 改成以下的設定
@@ -46,7 +48,7 @@ request_slowlog_timeout = 5s
 ``` bash
 mkdir -p /home/tom/apps/logs/
 sudo chown -R tom:tom /home/tom/apps/logs/
-sudo service php8.3-fpm restart
+sudo service php$PHP_VERSION-fpm restart
 ```
 
 ## 安裝 nginx
