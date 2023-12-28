@@ -11,6 +11,8 @@ draft: false
 
 這個是在 VirtualBox 6 新增虛擬機器，裝好 Debian 11 後，安裝 LEMP 的過程，最後安裝 Laravel 10 來寫網站後端
 
+[下載 debian-11.8.0-amd64-netinst.iso](https://cdimage.debian.org/cdimage/archive/11.8.0/amd64/iso-cd/debian-11.8.0-amd64-netinst.iso)
+
 ## 安裝 PHP-FPM 8.3
 
 ``` bash
