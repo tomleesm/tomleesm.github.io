@@ -32,6 +32,11 @@ vim ~/.bash_profile
 # 加上  export PATH="$PATH:/opt/nvim-linux64/bin"
 # 重新讀取 ~/.bash_profile 以啟用設定
 source ~/.bash_profile
+# root 也做一樣的設定，讓它可以用 neovim
+su root
+vim /root/.bash_profile
+# 加上  export PATH="$PATH:/opt/nvim-linux64/bin"
+source /root/.bash_profile
 ```
 
 [Guide to using Lua in Nvim](https://neovim.io/doc/user/lua-guide.html)說明如何轉移原來的 Vim 設定到 Neovim。例如 `vim.o.number = true` 顯示行數，設定放在 `~/.config/nvim/init.lua`，改用 Lua 語言設定 Neovim，也可以沿用 Vimscript 語法，只要把 `init.lua` 改成 `init.vim` 即可，兩個只能選一個。
