@@ -35,7 +35,7 @@ php artisan make:controller UserController
 
 ---
 
-路由設定在有無路由快取時結果不同
+路由設定在有無路由快取時結果不同。已在 Laravel 10 和 11 測試過，有相同結果
 
 ``` php
 use App\Http\Controllers\HomeController;
@@ -83,7 +83,7 @@ Route::get('/here', function() {
 });
 ```
 
-`GET /here` 時，有無路由快取結果也不同：
+`GET /here` 時，有無路由快取結果也不同。已在 Laravel 10 和 11 測試過，有相同結果
 
 | 路由快取 | A        | B        | 路由匹配 |
 | ---- | -------- | -------- | ---- |
