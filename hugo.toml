@@ -1,5 +1,5 @@
-baseurl = "http://www.example.com"
-title = "johndoe"
+baseurl = "https://tomleesm.github.io"
+title = "Tom 除錯中"
 theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"
@@ -16,10 +16,10 @@ shortname = "yourdiscussshortname"
 style = "github-dark"
 
 [params]
-  author = "John Doe"
-  info = "Full Stack DevOps and Magician"
-  description = "John Doe's personal website"
-  keywords = "blog,developer,personal"
+  author = "Tom"
+  info = "程式園丁一枚"
+  description = "Tom 的部落格，主要放閱讀程式設計書籍的筆記"
+  keywords = "blog,php,javascript"
   avatarurl = "images/avatar.jpg"
   #gravatar = "john.doe@example.com"
 
@@ -27,11 +27,11 @@ style = "github-dark"
   favicon_32 = "/img/favicon-32x32.png"
   favicon_16 = "/img/favicon-16x16.png"
 
-  since = 2019
+  since = 2025
 
   enableTwemoji = true
 
-  colorScheme = "auto"
+  colorScheme = "dark"
   hidecolorschemetoggle = false
 
   customCSS = ["css/custom.css"]
@@ -49,17 +49,17 @@ style = "github-dark"
   name = "Github"
   icon = "fa-brands fa-github fa-2x"
   weight = 1
-  url = "https://github.com/johndoe/"
-[[params.social]]
-  name = "Gitlab"
-  icon = "fa-brands fa-gitlab fa-2x"
-  weight = 2
-  url = "https://gitlab.com/johndoe/"
-[[params.social]]
-  name = "Twitter"
-  icon = "fa-brands fa-x-twitter fa-2x"
-  weight = 3
-  url = "https://twitter.com/johndoe/"
+  url = "https://github.com/tomleesm/"
+#[[params.social]]
+#  name = "Gitlab"
+#  icon = "fa-brands fa-gitlab fa-2x"
+#  weight = 2
+#  url = "https://gitlab.com/johndoe/"
+#[[params.social]]
+#  name = "Twitter"
+#  icon = "fa-brands fa-x-twitter fa-2x"
+#  weight = 3
+#  url = "https://twitter.com/johndoe/"
 
 # Menu links
 [[menu.main]]
