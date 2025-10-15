@@ -1,5 +1,5 @@
 ---
-title: {{ .Date | time.Format .Site.Params.dateFormat }}
+title: 標題
 date: {{ .Date }}
 author: Tom
 isStarred: false
