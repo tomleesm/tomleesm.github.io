@@ -1,4 +1,4 @@
-title = "Tom 碎碎念"
+title = "Tom 除錯中"
 baseURL = "https://example.org/"
 
 # This defines how dates are formatted
@@ -21,7 +21,7 @@ theme = "hugo-blog-awesome"
 # To enable Disqus comments, provide Disqus Shortname below.
 # To disable Disqus comments, simply leave the field empty or remove the next two lines
   [services.disqus]
-    shortname = ''
+    shortname = 'tomleesm'
 
 # set markup.highlight.noClasses=false to enable code highlight
 [markup]
@@ -57,20 +57,20 @@ theme = "hugo-blog-awesome"
     weight = 20
   [[Languages.zh-cn.menu.main]]
     pageRef="about"
-    name = '關於'
+    name = "關於"
     url = '/about/'
     weight = 30
 
 [Languages.zh-cn.params]
-  sitename = "Tom 碎碎念"
+  sitename = "Tom 除錯中"
   defaultColor = "dark" # set color mode: dark, light, auto
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
   # You can take a look at layouts/index.html for more information.
-  description = "我的日記，私人內容，不公開"
+  description = "程式設計相關"
   mainSections = ['posts']
-  toc = false # set to false to disable table of contents 'globally'
-  tocOpen = false # set to true to open table of contents by default
+  toc = true # set to false to disable table of contents 'globally'
+  tocOpen = true # set to true to open table of contents by default
   goToTop = true # set to false to disable 'go to top' button
   additionalScripts = ['js/custom.js', 'js/custom-2.js']
   # Will try to load 'assets/js/custom.js' and 'assets/js/custom-2.js'.
@@ -87,9 +87,9 @@ theme = "hugo-blog-awesome"
 [Languages.zh-cn.params.author]
   avatar = "avatar.jpg" # put the file in assets folder; also ensure that image has same height and width
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
-  intro = "Tom 碎碎念"
+  intro = "Tom 除錯中"
   name = "Tom"
-  description = "我的日記，私人內容，不公開"
+  description = "程式設計相關"
 
 # Allow to override webmanifest options
 [Languages.zh-cn.params.webmanifest]
@@ -102,7 +102,7 @@ theme = "hugo-blog-awesome"
 
 # Allow to override `browserconfig.xml` params (configuration for windows embedded browsers)
 [params.browserconfig]
-  TileColor = "#2d89ef" # default windows 10 blue tile color
+  TileColor = "#ef8b2d" # default windows 10 blue tile color
 
 [[params.socialIcons]]
 name = "github"
