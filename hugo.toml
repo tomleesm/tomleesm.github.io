@@ -111,3 +111,8 @@ url = "https://github.com/tomleesm"
 [[params.socialIcons]]
 name = "Rss"
 url = "/index.xml"
+
+# for deploy to GitHub Pages
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
