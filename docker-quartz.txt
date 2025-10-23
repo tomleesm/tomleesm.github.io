@@ -29,16 +29,15 @@ services:
 
 docker compose up -d
 ---------
-## BUILD
+## DEPLOY to GitHub Pages
+
+---
 docker compose exec -it wiki /bin/sh
 npx quartz build
-cp -r public/* /tmp/public/
+cp -r public/* /tmp/docs/
 exit
 
-## DEPLOY to GitHub Pages
-git checkout gh-pages
-git add public -f
+git add docs/
 git commit -m "update GitHub Pages"
-git subtree push --prefix public origin gh-pages
-git checkout -
+git push origin main
 ---
