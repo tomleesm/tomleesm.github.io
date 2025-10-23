@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"><head><title>常用 Vim 指令清單</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted Grotesk:wght@400;700&amp;family=Source Sans Pro:ital,wght@0,400;0,600;1,400;1,600&amp;family=IBM Plex Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Quartz 4"/><meta property="og:title" content="常用 Vim 指令清單"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="常用 Vim 指令清單"/><meta name="twitter:description" content="以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢 標示說明 標示說明&lt;C-A>Ctrl + A&lt;S-A>Shift + A&lt;CR>Return 或 Enter&lt;BS>Backspace &lt;-- operator 運算子 operator 運算子或指令說明x刪除一個字元d / D刪除或剪下。d 後面接 motion，D 則是直到改行結尾y 或 Y複製。y 後面接 motion，Y 則是直到改行結尾p / P貼上：游標在貼上的文字第一行非空白字元開頭gp / gP貼上：游標在貼上的文字最後一行開頭 / 留在原來那一行..."/><meta property="og:description" content="以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢 標示說明 標示說明&lt;C-A>Ctrl + A&lt;S-A>Shift + A&lt;CR>Return 或 Enter&lt;BS>Backspace &lt;-- operator 運算子 operator 運算子或指令說明x刪除一個字元d / D刪除或剪下。d 後面接 motion，D 則是直到改行結尾y 或 Y複製。y 後面接 motion，Y 則是直到改行結尾p / P貼上：游標在貼上的文字第一行非空白字元開頭gp / gP貼上：游標在貼上的文字最後一行開頭 / 留在原來那一行..."/><meta property="og:image:alt" content="以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢 標示說明 標示說明&lt;C-A>Ctrl + A&lt;S-A>Shift + A&lt;CR>Return 或 Enter&lt;BS>Backspace &lt;-- operator 運算子 operator 運算子或指令說明x刪除一個字元d / D刪除或剪下。d 後面接 motion，D 則是直到改行結尾y 或 Y複製。y 後面接 motion，Y 則是直到改行結尾p / P貼上：游標在貼上的文字第一行非空白字元開頭gp / gP貼上：游標在貼上的文字最後一行開頭 / 留在原來那一行..."/><meta property="twitter:domain" content="quartz.jzhao.xyz"/><meta property="og:url" content="https://quartz.jzhao.xyz/常用-Vim-指令清單"/><meta property="twitter:url" content="https://quartz.jzhao.xyz/常用-Vim-指令清單"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢 標示說明 標示說明&lt;C-A>Ctrl + A&lt;S-A>Shift + A&lt;CR>Return 或 Enter&lt;BS>Backspace &lt;-- operator 運算子 operator 運算子或指令說明x刪除一個字元d / D刪除或剪下。d 後面接 motion，D 則是直到改行結尾y 或 Y複製。y 後面接 motion，Y 則是直到改行結尾p / P貼上：游標在貼上的文字第一行非空白字元開頭gp / gP貼上：游標在貼上的文字最後一行開頭 / 留在原來那一行..."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvbm9kZS9xdWFydHovY29tcG9uZW50cy9zdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7O0FBSUY7RUFDRTtFQUNBO0VBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhwYW5kLWJ1dHRvbiB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiAwLjRyZW07XG4gIG1hcmdpbjogMC4zcmVtO1xuICByaWdodDogMDsgLy8gTk9URTogcmlnaHQgd2lsbCBiZSBzZXQgaW4gbWVybWFpZC5pbmxpbmUudHNcbiAgY29sb3I6IHZhcigtLWdyYXkpO1xuICBib3JkZXItY29sb3I6IHZhcigtLWRhcmspO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gIGJvcmRlcjogMXB4IHNvbGlkO1xuICBib3JkZXItcmFkaXVzOiA1cHg7XG4gIG9wYWNpdHk6IDA7XG4gIHRyYW5zaXRpb246IDAuMnM7XG5cbiAgJiA+IHN2ZyB7XG4gICAgZmlsbDogdmFyKC0tbGlnaHQpO1xuICAgIGZpbHRlcjogY29udHJhc3QoMC4zKTtcbiAgfVxuXG4gICY6aG92ZXIge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBib3JkZXItY29sb3I6IHZhcigtLXNlY29uZGFyeSk7XG4gIH1cblxuICAmOmZvY3VzIHtcbiAgICBvdXRsaW5lOiAwO1xuICB9XG59XG5cbnByZSB7XG4gICY6aG92ZXIgPiAuZXhwYW5kLWJ1dHRvbiB7XG4gICAgb3BhY2l0eTogMTtcbiAgICB0cmFuc2l0aW9uOiAwLjJzO1xuICB9XG59XG5cbiNtZXJtYWlkLWNvbnRhaW5lciB7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgY29udGFpbjogbGF5b3V0O1xuICB6LWluZGV4OiA5OTk7XG4gIGxlZnQ6IDA7XG4gIHRvcDogMDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBoZWlnaHQ6IDEwMHZoO1xuICBvdmVyZmxvdzogaGlkZGVuO1xuICBkaXNwbGF5OiBub25lO1xuICBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoNHB4KTtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjUpO1xuXG4gICYuYWN0aXZlIHtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIH1cblxuICAmID4gI21lcm1haWQtc3BhY2Uge1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgdG9wOiA1MCU7XG4gICAgbGVmdDogNTAlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICAgIGhlaWdodDogODB2aDtcbiAgICB3aWR0aDogODB2dztcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRlbnQge1xuICAgICAgcGFkZGluZzogMnJlbTtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="./prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://quartz.jzhao.xyz/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://quartz.jzhao.xyz/常用-Vim-指令清單-og-image.webp"/><meta property="og:image:url" content="https://quartz.jzhao.xyz/常用-Vim-指令清單-og-image.webp"/><meta name="twitter:image" content="https://quartz.jzhao.xyz/常用-Vim-指令清單-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="常用-Vim-指令清單"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href=".">Quartz 4</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Search</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="Reader mode"><title>Reader mode</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-19"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-19" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>常用 Vim 指令清單</a></div></nav><h1 class="article-title">常用 Vim 指令清單</h1><p show-comma="true" class="content-meta"><time datetime="2024-04-17T00:00:00.000Z">Apr 17, 2024</time><span>19 min read</span></p></div></div><article class="popover-hint"><p>以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢</p>
+<h2 id="標示說明">標示說明<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#標示說明" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>標示</th><th>說明</th></tr></thead><tbody><tr><td><code>&lt;C-A></code></td><td><code>Ctrl + A</code></td></tr><tr><td><code>&lt;S-A></code></td><td><code>Shift + A</code></td></tr><tr><td><code>&lt;CR></code></td><td><code>Return</code> 或 <code>Enter</code></td></tr><tr><td><code>&lt;BS></code></td><td>Backspace <code>&lt;--</code></td></tr></tbody></table></div>
+<h2 id="operator-運算子">operator 運算子<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#operator-運算子" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>operator 運算子或指令</th><th>說明</th></tr></thead><tbody><tr><td><code>x</code></td><td>刪除一個字元</td></tr><tr><td><code>d</code> / <code>D</code></td><td>刪除或剪下。<code>d</code> 後面接 motion，<code>D</code> 則是直到改行結尾</td></tr><tr><td><code>y</code> 或 <code>Y</code></td><td>複製。<code>y</code> 後面接 motion，<code>Y</code> 則是直到改行結尾</td></tr><tr><td><code>p</code> / <code>P</code></td><td>貼上：游標在貼上的文字第一行非空白字元開頭</td></tr><tr><td><code>gp</code> / <code>gP</code></td><td>貼上：游標在貼上的文字最後一行開頭 / 留在原來那一行的開頭</td></tr><tr><td><code>:set paste</code></td><td>貼上時取消縮排</td></tr><tr><td><code>></code> / <code>>></code> / <code>&lt;</code> / <code>&lt;&lt;</code></td><td>向右縮排 / 向右縮排一行 / 向左縮排 / 向左縮排一行</td></tr><tr><td><code>=</code> / <code>==</code></td><td>自動縮排 / 自動縮排一行</td></tr><tr><td><code>&lt;C-A></code> / <code>&lt;C-X></code></td><td>數字遞增 / 遞減</td></tr><tr><td><code>gu</code> / <code>gU</code> / <code>g~</code></td><td>英文字母 轉小寫 / 轉大寫 / 切換大小寫 (後面要加 motion)</td></tr><tr><td><code>~</code></td><td>切換大小 寫</td></tr><tr><td>(visual mode) <code>u</code> / <code>U</code> / <code>~</code></td><td>英文字母 轉小寫 / 轉大寫 / 切換大小寫</td></tr><tr><td>點 <code>.</code></td><td>重複上次修改（外掛 vim-repeat 透過 點 <code>.</code> 重複外掛操作）</td></tr><tr><td><code>u</code></td><td>取消上次修改</td></tr><tr><td><code>&lt;C-R></code></td><td>重作被取消的修改</td></tr></tbody></table></div>
+<h2 id="motion-動作">motion 動作<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#motion-動作" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>motion 動作</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td>小寫 <code>L</code></td><td>游標所在的一個字元</td><td></td></tr><tr><td><code>h</code> / <code>j</code> / <code>k</code> / <code>l</code></td><td>(實際行) 移動游標 左 / 下 / 上 / 右</td><td></td></tr><tr><td><code>gh</code> / <code>gj</code> / <code>gk</code> / <code>gl</code></td><td>(螢幕行) 移動游標 左 / 下 / 上 / 右</td><td></td></tr><tr><td><code>w</code> / <code>b</code> / <code>W</code> / <code>B</code></td><td>游標在單字開頭 下一個英文單字 / 上一個英文單字 / 下一個字串 / 上一個字串</td><td>107</td></tr><tr><td><code>e</code> / <code>ge</code> / <code>E</code> / <code>gE</code></td><td>游標在單字結尾 下一個英文單字 / 上一個英文單字 / 下一個字串 / 上一個字串</td><td>107</td></tr><tr><td>數字 <code>0</code> / <code>^</code> / <code>$</code></td><td>(實際行) 此行 開頭 / 開頭(非空格) / 結尾</td><td></td></tr><tr><td><code>g數字 0</code> / <code>g^</code> / <code>g$</code></td><td>(螢幕行) 此行 開頭 / 開頭(非空格) / 結尾</td><td></td></tr><tr><td><code>f</code> 字元 / <code>F</code> 字元 / <code>t</code> 字元 / <code>T</code> 字元</td><td>(尋找此行游標的) 右邊 字元 / 左邊 字元 / 右邊 字元 的左邊 / 左邊 字元 的右邊</td><td></td></tr><tr><td>分號 <code>;</code> / 逗號 <code>,</code></td><td>(尋找此行) 下一個 / 上一個</td><td></td></tr><tr><td><code>gg</code> / <code>G</code></td><td>緩衝區 第一行 / 最後一行</td><td></td></tr><tr><td><code>%</code></td><td>成對括號的結尾或開頭</td><td>122</td></tr><tr><td>“ (連續兩個鍵盤上方 ~ 下方的 ` )</td><td>回到上一個跳轉的游標位置：是指 <code>%</code>、<code>gg</code> 或 <code>G</code>、`a 、<code>0</code> 或 <code>$</code>、或搜尋之類的跳轉，所以上下左右移動不算，用 <code>w</code> 或 <code>b</code> 跳轉也不算</td><td></td></tr></tbody></table></div>
+<h2 id="text-object-文字物件">text object 文字物件<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#text-object-文字物件" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>text object 文字物件</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>iw</code> / <code>iW</code> / <code>aw</code> / <code>aW</code></td><td>inside word / inside 字串 / a word / a 字串</td><td></td></tr><tr><td><code>i)</code> / <code>i]</code> / <code>i}</code> / <code>i></code> / <code>i'</code> / <code>i&quot;</code> / <code>i\</code> / <code>it</code></td><td>inside 括號、引號、html tag (不包含括號、引號、html tag 本身)</td><td>117</td></tr><tr><td><code>a)</code> / <code>a]</code> / <code>a}</code> / <code>a></code> / <code>a'</code> / <code>a&quot;</code> / <code>a\</code> / <code>at</code></td><td>一個括號、引號、html tag (包含括號、引號、html tag 本身)</td><td>117</td></tr><tr><td><code>is</code> / <code>as</code></td><td>文章的一個句子，以一個點 . 表示到此為一句，中文也是 (注意，不是一行)</td><td>119</td></tr><tr><td><code>ip</code> / <code>ap</code></td><td>a paragraph (文章的一個段落)</td><td>119</td></tr><tr><td></td><td>targets.vim 提供許多額外的 text object</td><td></td></tr></tbody></table></div>
+<h2 id="register-暫存器">register 暫存器<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#register-暫存器" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>存取暫存器指令</th><th>例如貼上複製好的字串</th></tr></thead><tbody><tr><td>(normal mode) <code>&quot;{register}</code></td><td>(normal mode) <code>&quot;0</code></td></tr><tr><td>(insert mode) <code>&lt;C-R>{register}</code></td><td>(insert mode) <code>Ctrl + R</code> 數字 <code>0</code></td></tr><tr><td>(Ex mode) <code>&lt;C-R>{register}</code></td><td>(Ex mode) <code>Ctrl + R</code> 數字 <code>0</code></td></tr><tr><td><strong>指令</strong></td><td><strong>說明</strong></td></tr><tr><td>(Ex mode) <code>@{register}</code></td><td>執行暫存器內容</td></tr><tr><td><code>:reg a</code> / <code>:reg</code></td><td>顯示 register <code>a</code> 的值 / 顯示所有 register 的值</td></tr><tr><td><strong>暫存器代表符號 <code>{register}</code></strong></td><td><strong>說明</strong></td></tr><tr><td><code>=</code></td><td>expression 暫存器 (貼上簡單的數學計算結果，例如 (normal mode) <code>&quot;=2+3</code> 會貼上 5)</td></tr><tr><td><code>&quot;</code></td><td>無名暫存器</td></tr><tr><td><code>{a-z}</code></td><td>有名暫存器，從 a 到 z</td></tr><tr><td><code>0</code></td><td>複製專用暫存器</td></tr><tr><td><code>{1-9}</code></td><td>delete 專用暫存器。1 是最近的，可紀錄到前9個</td></tr><tr><td><code>%</code></td><td>目前檔案名稱</td></tr><tr><td><code>#</code></td><td>輪流切換的檔案名稱 (使用 <code>:bn</code> 等命令時，上一個檔案的名稱)</td></tr><tr><td><code>.</code></td><td>上次插入的文字</td></tr><tr><td><code>:</code></td><td>上次執行的 Ex 命令</td></tr><tr><td><code>/</code></td><td>上次搜尋的 pattern</td></tr><tr><td><code>_</code></td><td>黑洞暫存器 (刪除而且不留副本)</td></tr></tbody></table></div>
+<h2 id="folding-折疊">folding 折疊<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#folding-折疊" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th></tr></thead><tbody><tr><td><code>:set foldmethod=摺疊方式</code></td><td>foldmethod 可縮寫成 fdm</td></tr><tr><td><code>:set fdm=manual</code></td><td>手動摺疊</td></tr><tr><td><code>:set fdm=indent</code></td><td>依照縮排摺疊</td></tr><tr><td><code>:set fdm=syntax</code></td><td>依照語法摺疊(似乎要另外設定一些東西才能運作)</td></tr><tr><td><code>zf{motion}</code></td><td>手動新增摺疊，例如 <code>zf3j</code> 摺疊目前游標到下面三行</td></tr><tr><td>用 visual mode 選好範圍，按 <code>zf</code></td><td>選取範圍手動新增摺疊</td></tr><tr><td><code>:[range] fold</code></td><td>ex 命令手動新增摺疊，例如 <code>:10, 25 fold</code> 摺疊 10 到 25 行</td></tr><tr><td><code>zd</code> /<code>zE</code></td><td>刪除游標所在摺疊 / 刪除所有摺疊</td></tr><tr><td><code>zo</code></td><td>打開游標所在摺疊</td></tr><tr><td><code>zc</code></td><td>關閉游標所在摺疊</td></tr><tr><td><code>zx</code></td><td>打開游標所在摺疊，其餘關閉</td></tr><tr><td><code>za</code></td><td>切換游標所在摺疊</td></tr><tr><td><code>zi</code></td><td>切換啓用摺疊</td></tr><tr><td><code>zj</code> / <code>zk</code></td><td>移動到下一個摺疊 / 上一個摺疊</td></tr><tr><td><code>zn</code> / <code>zN</code></td><td>啓用摺疊 / 禁用摺疊</td></tr></tbody></table></div>
+<h2 id="自動補齊">自動補齊<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#自動補齊" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td>(insert mode) <code>&lt;C-N></code></td><td>普通關鍵字 (包含目前緩衝區、引入檔案和 ctags)</td><td>265</td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-N></code> / <code>&lt;C-X>&lt;C-P></code></td><td>目前緩衝區關鍵字：下一個 / 上一個</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-I></code></td><td>include, import 等引入的檔案關鍵字</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-]></code></td><td>ctags 標籤檔案關鍵字</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-K></code></td><td>拼字建議 (先啟用拼字檢查)</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-L></code></td><td>目前緩衝區整行補齊</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-F></code></td><td>檔案名稱補齊 (依照目前工作目錄)</td><td></td></tr><tr><td>(insert mode) <code>&lt;C-X>&lt;C-O></code></td><td>Omni 全能補齊(需要額外設定)</td><td></td></tr><tr><td>(關鍵字清單) <code>&lt;C-N></code> / <code>&lt;C-P></code></td><td>填上選擇的關鍵字：下一個 / 上一個</td><td>266</td></tr><tr><td>(關鍵字清單) <code>&lt;Down></code> / <code>&lt;Up></code> / <code>&lt;C-Y></code></td><td>選擇關鍵字：下一個 / 上一個 / 確認填上選擇的關鍵字</td><td></td></tr><tr><td>(關鍵字清單) <code>&lt;C-E></code></td><td>取消自動補齊</td><td></td></tr><tr><td>(關鍵字清單) <code>&lt;C-H></code> 或 <code>&lt;BS></code></td><td>填上關鍵字並刪除一個字元</td><td></td></tr><tr><td>輸入任意字元</td><td>中止自動補齊並插入字元</td><td></td></tr></tbody></table></div>
+<h2 id="插入字元符號">插入字元符號<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#插入字元符號" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>插入字元符號</th><th>說明</th></tr></thead><tbody><tr><td></td><td>以下的 i, a, s, c, r 和 o 都是進入 Insert mode</td></tr><tr><td><code>i</code> / 大寫 <code>I</code></td><td>游標前面 / 游標所在該行的非空白開頭</td></tr><tr><td><code>a</code> / 大寫 <code>A</code></td><td>游標後面 / 游標所在該行的結尾</td></tr><tr><td><code>s</code> / 大寫 <code>S</code></td><td>刪除游標所在的字元後 / 刪除游標所在該行所有非字元後</td></tr><tr><td><code>c{motion}</code> / 大寫 <code>C</code></td><td>刪除指定 motion 字元後 / 刪除游標到該行結尾後</td></tr><tr><td><code>r</code> / 大寫 <code>R</code></td><td>修改一個字元後 / 進入 replace mode，直到按下 <code>&lt;ESC></code> 或 <code>&lt;C-[></code>，回到 normal mode</td></tr><tr><td>英文字母 <code>o</code> / <code>O</code></td><td>新增一行後：下面 / 上面</td></tr><tr><td>(insert mode) <code>&lt;C-H></code></td><td>刪除前一個字元 (等同 backspace)</td></tr><tr><td>(insert mode) <code>&lt;C-W></code></td><td>刪除前一個單字</td></tr><tr><td>(insert mode) <code>&lt;C-U></code></td><td>刪除到此行開頭(非空格)</td></tr><tr><td><code>&lt;ESC></code></td><td>切換到 normal mode</td></tr><tr><td>(insert mode) <code>&lt;C-[></code></td><td>切換到 normal mode</td></tr><tr><td>(insert mode) <code>&lt;C-O></code></td><td>切換到 insert-normal mode (執行一個 normal mode 指令後回到 insert mode)</td></tr><tr><td>(insert mode) <code>&lt;C-V></code></td><td>準備插入特殊字元</td></tr><tr><td><code>&lt;C-V>{065}</code></td><td>插入編碼為 000 到 999 的 ANSI Code 字元，<code>&lt;C-V>065</code> 會輸入 A</td></tr><tr><td><code>&lt;C-V>u{1234}</code></td><td>插入編碼為 16 進位 0000 到 ffff 的 Unicode 字元</td></tr><tr><td><code>&lt;C-V>非數字</code></td><td>插入原來的字元</td></tr><tr><td><code>:h i_CTRL-V_digit</code></td><td>上述功能的簡短說明</td></tr><tr><td>(insert mode) <code>&lt;C-K></code></td><td>準備插入 digraph 二合字母</td></tr><tr><td><code>&lt;C-K>{字元}{字元}</code></td><td>例如 <code>&lt;C-K>12</code> 插入數學的二分之一</td></tr><tr><td><code>:h digraph-table</code></td><td>二合字母列表</td></tr><tr><td><code>:h digraph-table-mbyte</code></td><td>二合字母列表(包含日文假名和注音符號)</td></tr></tbody></table></div>
+<h2 id="拼字檢查">拼字檢查<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#拼字檢查" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th></tr></thead><tbody><tr><td><code>:set spell</code> / <code>:set nospell</code> / <code>:set spell!</code></td><td>拼字檢查：啟用 / 停用 / 切換</td></tr><tr><td><code>]s</code> / <code>[s</code></td><td>跳轉到拼寫錯誤的單字：下一個 / 上一個</td></tr><tr><td><code>數字z=</code></td><td>顯示更正建議清單，可在前面加上數字，直接選取清單的第幾個單字</td></tr><tr><td><code>zg</code> / <code>zw</code> / <code>zug</code></td><td>增減建議字典檔：增加 / 刪除 / 取消之前的 <code>zg</code> 或 <code>zw</code> 命令</td></tr></tbody></table></div>
+<h2 id="visual-模式">visual 模式<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#visual-模式" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th></tr></thead><tbody><tr><td><code>v</code> / <code>V</code> / <code>&lt;C-V></code></td><td>使用 visual mode：字元 / 此行 / block 區塊</td></tr><tr><td><code>gv</code></td><td>重新選擇上次的 highlight 選擇區</td></tr><tr><td>(visual mode) 英文字母 o</td><td>切換 highlight 選擇區的調整端</td></tr></tbody></table></div>
+<h2 id="ex-mode">ex mode<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#ex-mode" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th></tr></thead><tbody><tr><td><code>:選擇範圍 命令 {到達位置}</code></td><td>先選擇範圍，再輸入命令(如果沒有選擇範圍，預設為目前這一行)</td></tr><tr><td><strong>選擇範圍</strong></td><td></td></tr><tr><td><code>:n</code></td><td>移動游標到第 n 行</td></tr><tr><td><code>:m, n</code></td><td>第 m 行到第 n 行，游標停在第 n 行</td></tr><tr><td><code>:1, $</code></td><td>從第一行到最後一行</td></tr><tr><td><code>:1, .</code></td><td>從第一行到游標所在這一行（數字 1 到一個點）</td></tr><tr><td>數字 <code>0</code></td><td>目前檔案第一行的上一行 (用 <code>:put</code> 貼到第一行時需要用到)</td></tr><tr><td><code>:%</code></td><td>整個檔案 (參考 <code>:h cmdline-special</code> 和 <code>:h filename-modifiers</code>)</td></tr><tr><td>使用 visual mode 之後按 <code>:</code></td><td>目前的 visual mode highlight 範圍</td></tr><tr><td><code>:'&lt;, '></code></td><td>上一次的 visual mode highlight 範圍(開始和結束)</td></tr><tr><td><code>:/pattern1/, /pattern2/</code></td><td>從 pattern1 這一行到 pattern2 那一行</td></tr><tr><td><code>:/pattern1/+m, /pattern2/-n</code></td><td>從 pattern1 這一行往下 m 行到 pattern2 那一行向上 n 行 (注意加和減兩邊沒有空格)</td></tr><tr><td><strong>ex 命令</strong></td><td></td></tr><tr><td><code>:print</code> 或 <code>:p</code></td><td>顯示</td></tr><tr><td><code>:copy</code> 或 <code>:co</code> / <code>:t</code> (copy To)</td><td>複製(不會放到預設的暫存器中)</td></tr><tr><td><code>:move</code> 或 <code>:m</code></td><td>移動</td></tr><tr><td><code>:delete</code> 或 <code>:d</code></td><td>刪除</td></tr><tr><td><code>:[line]put {register}</code></td><td>貼上到指定行的下一行</td></tr><tr><td><code>:normal @{a-z}</code></td><td>執行 normal mode 命令，<code>@{a-z}</code> 表示執行的是 macro</td></tr><tr><td><code>@:</code></td><td>重複之前的 ex 命令</td></tr><tr><td><code>@@</code></td><td>重複之前用 <code>@:</code> 執行過的 ex 命令</td></tr><tr><td><code>q:</code></td><td>顯示 ex 命令歷史視窗。按下 enter 表示執行游標所在那一行的 ex 命令</td></tr><tr><td><code>q/</code></td><td>顯示搜尋歷史視窗</td></tr><tr><td>(ex mode) <code>&lt;C-F></code></td><td>從 ex mode 切換到 ex 命令歷史視窗</td></tr><tr><td>(ex mode) <code>&lt;C-D></code></td><td>顯示可用的 ex 命令</td></tr><tr><td>(ex mode) <code>&lt;TAB></code></td><td>自動補齊</td></tr><tr><td>(ex mode) <code>&lt;S-TAB></code></td><td>從最後一個開始，自動補齊</td></tr><tr><td>(ex mode) <code>&lt;C-R>&lt;C-W></code></td><td>複製游標所在的單字</td></tr><tr><td>(ex mode) <code>&lt;C-R>&lt;C-A></code></td><td>複製游標所在的字串(直到兩邊的空格)</td></tr><tr><td><code>:shell</code> / <code>exit</code></td><td>切換到互動式 shell / 切換回 Vim</td></tr><tr><td><code>&lt;C-Z></code> / <code>fg</code></td><td>暫停 Vim ，並移到背景 / 把 Vim 移回前景</td></tr><tr><td><code>:read !cmd</code></td><td>執行 shell 指令(cmd)，並把輸出貼到 Vim 游標所在下一行。<code>read</code> 可以縮寫為 <code>r</code></td></tr><tr><td><code>:[range]write !cmd</code></td><td>把 Vim 選取範圍傳給 shell 指令(cmd) 做為其參數。<code>write</code> 可以縮寫為 <code>w</code></td></tr><tr><td><code>:[range] !{filter}</code></td><td>使用外部 shell 指令過濾指令範圍</td></tr><tr><td><code>:source file.vim</code></td><td>套用 <code>file.vim</code> 內的 ex 命令</td></tr><tr><td>(ex mode) cmd | cmd</td><td>分隔兩個 cmd 命令</td></tr></tbody></table></div>
+<h2 id="管理多個檔案">管理多個檔案<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#管理多個檔案" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>:q!</code></td><td>指令後面加上驚嘆號表示強制執行，不確認</td><td></td></tr><tr><td><strong>打開檔案</strong></td><td></td><td></td></tr><tr><td><code>:edit</code> / <code>:edit!</code> / <code>:e</code></td><td>打開檔案 / 重新打開檔案，覆蓋目前的緩衝區 / <code>:edit</code> 的縮寫</td><td></td></tr><tr><td><code>:find file</code></td><td>在 path 中尋找檔案 file 並打開 (這樣就不用完整路徑了)</td><td>91</td></tr><tr><td><code>:set path+=app/**</code></td><td>新增 path 為 app/ 和子目錄</td><td>91</td></tr><tr><td><code>:edit .</code> 或 <code>:e.</code> / <code>:E[xplore]</code></td><td>打開 Netrw 文件管理器： 目前檔案所在目錄 / 目前工作目錄</td><td>94</td></tr><tr><td><code>:lcd</code> / <code>:cd</code></td><td>設定 working dictionary：目前視窗 / 所有的視窗</td><td></td></tr><tr><td><code>:pwd</code></td><td>顯示目前視窗的 working dictionary (不是檔案位置)</td><td></td></tr><tr><td><strong>存檔</strong></td><td></td><td></td></tr><tr><td><code>:w[rite]</code> / <code>:wa[ll]</code></td><td>存檔 / 全部存檔</td><td></td></tr><tr><td><code>:write file</code></td><td>Vim 存檔為 file。<code>write</code> 可以縮寫成 <code>w</code></td><td></td></tr><tr><td><code>:update</code></td><td>存檔 (有修改的才儲存)</td><td></td></tr><tr><td><code>:q[uit]</code> / <code>:q!</code> / <code>:qa[ll]!</code></td><td>離開 Vim / 不存檔 / 全部不存檔</td><td></td></tr><tr><td><strong>緩衝區</strong></td><td></td><td></td></tr><tr><td><code>:ls</code></td><td>顯示緩衝區清單</td><td></td></tr><tr><td><code>:bn[ext]</code> / <code>:bp[revious]</code> / <code>:bfirst</code> / <code>:blast</code></td><td>切換緩衝區 下一個 / 上一個 / 第一個 / 最後一個</td><td></td></tr><tr><td><code>&lt;C-^></code></td><td>切換到上一個顯示的緩衝區。酸然是 <code>^</code>，但是不用按 <code>&lt;S></code> 所以實際上是 <code>&lt;C-6></code></td><td></td></tr><tr><td><code>:b[uffer] 數字或名稱</code></td><td>切換到 <code>!ls</code> 清單的指定緩衝區。可用<code>&lt;TAB></code>自動補齊</td><td></td></tr><tr><td><code>:[range] bd[elete]</code> / <code>:bd[elete] 1 2 3</code></td><td>刪除緩衝區 指定範圍 / 指定哪幾個</td><td></td></tr><tr><td><strong>args 命令</strong></td><td></td><td></td></tr><tr><td><code>:args file1 file2</code></td><td>開啟指定檔案，緩衝區順序依照輸入順序</td><td></td></tr><tr><td><code>:args */*.*</code> / <code>:args **/*.*</code></td><td>開啟檔案 不包含子目錄的檔案 / 包含子目錄內的檔案</td><td>79</td></tr><tr><td><code>:args</code> `shell cmd`</td><td>執行反引號  ` 包起來的 shell 指令，把輸出作為要開啟的檔案。沒有檔案的話就新增檔案</td><td>79</td></tr><tr><td><code>&lt;C-G></code></td><td>顯示目前檔案名稱和狀態</td><td></td></tr></tbody></table></div>
+<h2 id="分割視窗--tab-分頁">分割視窗 / Tab 分頁<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#分割視窗--tab-分頁" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><strong>分割視窗</strong></td><td></td><td></td></tr><tr><td><code>&lt;C-W>s</code> / <code>&lt;C-W>v</code></td><td>分割視窗：水平 / 垂直</td><td>83</td></tr><tr><td><code>:sp[lit] file</code> / <code>:vsp[lit] file</code></td><td>分割視窗，並在新視窗中打開檔案：水平 / 垂直</td><td>84</td></tr><tr><td><code>&lt;C-W></code> 加上 <code>w</code> / <code>h</code> / <code>j</code> / <code>k</code> / <code>l</code></td><td>切換視窗：循環 / 左 / 下 / 上 / 右</td><td>84</td></tr><tr><td><code>:clo[se]</code> / <code>&lt;C-W>c</code></td><td>關閉 active window</td><td>84</td></tr><tr><td><code>:on[ly]</code> / <code>&lt;C-W>o</code></td><td>關閉其他視窗</td><td>84</td></tr><tr><td></td><td></td><td></td></tr><tr><td><code>:windo</code> 命令</td><td>目前 Tab 的所有視窗，執行命令</td><td>86</td></tr><tr><td><strong>Tab 分頁</strong></td><td></td><td></td></tr><tr><td><code>:tabe[dit] file</code> / <code>&lt;C-W>t</code></td><td>開新的 Tab，打開檔案。沒有檔案的話，開新的檔案 / 移動目前視窗到新的 Tab</td><td>87</td></tr><tr><td><code>:tabc[lose]</code> / <code>:tabo[nly]</code></td><td>關閉目前 Tab / 關閉其他 Tab</td><td>87</td></tr><tr><td><code>:tabn[ext] n</code> / <code>:tabp[revious]</code></td><td>切換 Tab：跳到編號 n 的，不指定編號則為下一個 / 上一個</td><td>87</td></tr><tr><td>編號<code>gt</code> / <code>gT</code></td><td>切換 Tab：跳到指定編號的 Tab，不指定編號則為下一個 / 上一個</td><td>87</td></tr><tr><td><code>:tabm[ove] 數字</code></td><td>移動 Tab 順序，數字 0 表示最左邊，然後是 1 。沒有數字則為最右邊</td><td></td></tr></tbody></table></div>
+<h2 id="跳轉">跳轉<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#跳轉" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>:jumps</code> / <code>&lt;C-O></code> / <code>&lt;C-I></code></td><td>跳轉：顯示歷史清單 / 上一個位置 / 下一個位置 (注意：只能用來跳轉，而且只能在目前的視窗中跳轉)</td><td>125, 126</td></tr><tr><td><code>m{a-z}</code> / <code>m{A-Z}</code></td><td>標示目前游標位置：小寫字母(目前顯示的緩衝區內可用) / 大寫字母 (所有緩衝區可用)</td><td>120</td></tr><tr><td>`<code>{字母}</code></td><td>跳到位置標記：第幾行和第幾列</td><td>121</td></tr><tr><td><code>'{字母}</code></td><td>跳到位置標記：第幾行的開頭</td><td></td></tr><tr><td><code>gf</code></td><td>跳轉到目前游標下的檔案。用在 <code>include('file')</code> 之類</td><td>128, 129, 130</td></tr><tr><td><code>:set suffixesadd+=.php,..html,.htm,.js,.css</code></td><td>指定 gf 時要嘗試加上的副檔名</td><td></td></tr><tr><td><code>&lt;C-]></code> / <code>g&lt;C-]></code> / <code>&lt;C-T></code></td><td>跳轉到定義 / 跳轉到定義，並且顯示清單 / 回到原處</td><td>242</td></tr><tr><td><code>:tselect</code> / <code>:tnext</code> / <code>:tprev</code></td><td>顯示 ctags 清單</td><td>243</td></tr></tbody></table></div>
+<h2 id="搜尋">搜尋<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#搜尋" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>/{pattern}/[e]</code></td><td>向下搜尋：沒有 <code>{pattern}</code> 則使用上一個 <code>{pattern}</code>，e flag 表示游標在匹配的結尾</td><td>193</td></tr><tr><td><code>?{pattern}/[e]</code></td><td>向上搜尋：沒有 <code>{pattern}</code> 則使用上一個 <code>{pattern}</code>，e flag 表示游標在匹配的結尾</td><td>193</td></tr><tr><td><code>n</code> / <code>N</code></td><td>下一個匹配 / 上一個匹配</td><td></td></tr><tr><td><code>gn</code> / <code>gN</code></td><td>進入 visual mode，同時選取匹配：下一個匹配 / 上一個匹配 (此為 motion)</td><td>195, 196</td></tr><tr><td></td><td>搜尋單引號內的文字</td><td>197, 198, 199</td></tr><tr><td></td><td>搜尋 visual mode 選取的文字</td><td>202, 203</td></tr></tbody></table></div>
+<h2 id="取代">取代<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#取代" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>:[range]s[ubsititute]/{before}/{after}/[gcn]</code></td><td>取代文字：搜尋 before，改成 after</td><td>205</td></tr><tr><td><code>:%s//{pattern}/g</code></td><td>使用上一個搜尋條件取代為 <code>{pattern}</code> (常用的取代命令格式)</td><td>209</td></tr><tr><td>flag <code>g</code> / <code>c</code> / <code>n</code></td><td>全部取代 / 確認後取代 / 不取代，只計算符合的數量</td><td></td></tr><tr><td></td><td>flag c 的選擇</td><td>208</td></tr><tr><td><code>:&amp;&amp;</code></td><td>執行上一個 substitute 取代命令和上一個 flag</td><td>215</td></tr></tbody></table></div>
+<h2 id="macro-巨集">macro 巨集<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#macro-巨集" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>指令</th><th>說明</th><th>Practical Vim 頁碼</th></tr></thead><tbody><tr><td><code>q{a-z}</code> / <code>q</code></td><td>錄製 macro / 停止錄製 macro</td><td></td></tr><tr><td><code>數字@{a-z}</code></td><td>執行 macro，可加上數字指定執行幾次 (出錯就會停止)</td><td></td></tr><tr><td><code>(Ex mode) normal @{a-z}</code></td><td>執行 macro (出錯不會停止)</td><td>159</td></tr><tr><td><code>@@</code></td><td>執行上一個 macro</td><td></td></tr><tr><td><code>q{A-Z}</code></td><td>把命令加到舊的 macro 後面</td><td></td></tr><tr><td></td><td>macro 只是存在 register 的文字，只要編輯後放回去，就能修改 macro</td><td>170</td></tr></tbody></table></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"><div class="graph"><h3>Graph View</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-10" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#標示說明" data-for="標示說明">標示說明</a></li><li class="depth-0"><a href="#operator-運算子" data-for="operator-運算子">operator 運算子</a></li><li class="depth-0"><a href="#motion-動作" data-for="motion-動作">motion 動作</a></li><li class="depth-0"><a href="#text-object-文字物件" data-for="text-object-文字物件">text object 文字物件</a></li><li class="depth-0"><a href="#register-暫存器" data-for="register-暫存器">register 暫存器</a></li><li class="depth-0"><a href="#folding-折疊" data-for="folding-折疊">folding 折疊</a></li><li class="depth-0"><a href="#自動補齊" data-for="自動補齊">自動補齊</a></li><li class="depth-0"><a href="#插入字元符號" data-for="插入字元符號">插入字元符號</a></li><li class="depth-0"><a href="#拼字檢查" data-for="拼字檢查">拼字檢查</a></li><li class="depth-0"><a href="#visual-模式" data-for="visual-模式">visual 模式</a></li><li class="depth-0"><a href="#ex-mode" data-for="ex-mode">ex mode</a></li><li class="depth-0"><a href="#管理多個檔案" data-for="管理多個檔案">管理多個檔案</a></li><li class="depth-0"><a href="#分割視窗--tab-分頁" data-for="分割視窗--tab-分頁">分割視窗 / Tab 分頁</a></li><li class="depth-0"><a href="#跳轉" data-for="跳轉">跳轉</a></li><li class="depth-0"><a href="#搜尋" data-for="搜尋">搜尋</a></li><li class="depth-0"><a href="#取代" data-for="取代">取代</a></li><li class="depth-0"><a href="#macro-巨集" data-for="macro-巨集">macro 巨集</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>Backlinks</h3><ul id="list-2" class="overflow"><li><a href="./" class="internal">wiki</a></li><li class="overflow-end"></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2025</p><ul><li><a href="https://github.com/jackyzha0/quartz">GitHub</a></li><li><a href="https://discord.gg/cRFFHYye7t">Discord Community</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="./postscript.js" type="module"></script></html>
