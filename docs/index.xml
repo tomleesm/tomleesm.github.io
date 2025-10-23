@@ -6,16 +6,16 @@
       <description>Last 10 notes on Quartz 4</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>使用 docker 執行 node.js，問 AI 語法</title>
-    <link>https://quartz.jzhao.xyz/%E4%BD%BF%E7%94%A8-docker-%E5%9F%B7%E8%A1%8C-node.js</link>
-    <guid>https://quartz.jzhao.xyz/%E4%BD%BF%E7%94%A8-docker-%E5%9F%B7%E8%A1%8C-node.js</guid>
-    <description><![CDATA[ 用 docker 執行 node.js 環境，先從 shell 開始，因為需要執行 node file.js。一般是用 docker run 如下所示 docker run --rm -it node:22-alpine /bin/sh 怎麼改用 docker compose 實作呢？ 我平常只用 AI 來翻譯英文，和做一些市場調查，例如問它「網站後端程式語言市占率」，想說問問看「請將 docker run —rm -it node:22-alpine /bin/sh 改用 docker compose」，結果如下： ChatGPT 你可以使用 Docker Compose 來達成等效於 do... ]]></description>
-    <pubDate>Thu, 23 Oct 2025 05:01:20 GMT</pubDate>
-  </item><item>
     <title>wiki</title>
     <link>https://quartz.jzhao.xyz/</link>
     <guid>https://quartz.jzhao.xyz/</guid>
     <description><![CDATA[ 程式設計觀念 Git rebase 是什麼？ HTTP 通訊協議簡介 RESTful API 簡介 為什麼要有例外處理？ 解 UVa 線上解題系統的題目 資料庫正規化，以魔法學校課程為例 程式安裝、設定和語法 GitHub 預設分支 master 改名為 main Git 設定 memos 安裝到 Debian 9 Netrw 簡介 PHP 物件導向語法筆記 PostgreSQL 筆記 Windows 10 推薦軟體 Windows Terminal 設定多個字體 使用 API Blueprint 寫文件 使用 Docker Compose 安裝 Laravel 和 Vue.js 環境 使用 ... ]]></description>
+    <pubDate>Thu, 23 Oct 2025 06:16:49 GMT</pubDate>
+  </item><item>
+    <title>使用 docker 執行 node.js，問 AI 語法</title>
+    <link>https://quartz.jzhao.xyz/%E4%BD%BF%E7%94%A8-docker-%E5%9F%B7%E8%A1%8C-node.js</link>
+    <guid>https://quartz.jzhao.xyz/%E4%BD%BF%E7%94%A8-docker-%E5%9F%B7%E8%A1%8C-node.js</guid>
+    <description><![CDATA[ 用 docker 執行 node.js 環境，先從 shell 開始，因為需要執行 node file.js。一般是用 docker run 如下所示 docker run --rm -it node:22-alpine /bin/sh 怎麼改用 docker compose 實作呢？ 我平常只用 AI 來翻譯英文，和做一些市場調查，例如問它「網站後端程式語言市占率」，想說問問看「請將 docker run —rm -it node:22-alpine /bin/sh 改用 docker compose」，結果如下： ChatGPT 你可以使用 Docker Compose 來達成等效於 do... ]]></description>
     <pubDate>Thu, 23 Oct 2025 05:01:20 GMT</pubDate>
   </item><item>
     <title>時間管理方法</title>
