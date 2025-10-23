@@ -32,10 +32,7 @@ docker compose up -d
 ## DEPLOY to GitHub Pages
 
 ---
-docker compose exec -it wiki /bin/sh
-npx quartz build
-cp -r public/* /tmp/docs/
-exit
+docker compose exec wiki /bin/sh -c 'npx quartz build && cp -r public/* /tmp/docs/'
 
 git add docs/
 git commit -m "update GitHub Pages"
