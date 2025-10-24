@@ -10,7 +10,43 @@
     <link>https://quartz.jzhao.xyz/</link>
     <guid>https://quartz.jzhao.xyz/</guid>
     <description><![CDATA[ 程式設計觀念 Git rebase 是什麼？ HTTP 通訊協議簡介 RESTful API 簡介 為什麼要有例外處理？ 解 UVa 線上解題系統的題目 資料庫正規化，以魔法學校課程為例 程式安裝、設定和語法 GitHub 預設分支 master 改名為 main Git 設定 memos 安裝到 Debian 9 Netrw 簡介 PHP 物件導向語法筆記 PostgreSQL 筆記 Windows 10 推薦軟體 Windows Terminal 設定多個字體 使用 API Blueprint 寫文件 使用 Docker Compose 安裝 Laravel 和 Vue.js 環境 使用 ... ]]></description>
-    <pubDate>Thu, 23 Oct 2025 06:16:49 GMT</pubDate>
+    <pubDate>Fri, 24 Oct 2025 08:36:40 GMT</pubDate>
+  </item><item>
+    <title>為什麼寫 wiki？</title>
+    <link>https://quartz.jzhao.xyz/%E7%82%BA%E4%BB%80%E9%BA%BC%E5%AF%AB-wiki%EF%BC%9F</link>
+    <guid>https://quartz.jzhao.xyz/%E7%82%BA%E4%BB%80%E9%BA%BC%E5%AF%AB-wiki%EF%BC%9F</guid>
+    <description><![CDATA[ 記性不好 看到阮一峰的blog文章清單，覺得為什麼有那麼多教程？光是 Git/GitHub 相關的就有16個，從基本的指令到難懂的原理都有？很多是網路上搜尋一下就有的，而且為什麼這麼好心寫這些東西？甚至有C 语言入门教程，如果是我，直接推薦幾本書就好了，例如著名的 K&amp;R The C Programming Language 2nd，為什麼要大費周章的寫網路教學文章？ 其實不是好心，因為記性差，所以寫文章記錄，例如： Vim 的配置不太容易，它有自己的语法，许许多多的命令。我总是记不清楚，所以就整理了下面这篇文章，列出主要配置项的含义。 Vim 配置入门 教學相長 另外學程式語言、安裝... ]]></description>
+    <pubDate>Fri, 24 Oct 2025 08:01:31 GMT</pubDate>
+  </item><item>
+    <title>Laravel 10 安裝 jQuery</title>
+    <link>https://quartz.jzhao.xyz/Laravel-10-%E5%AE%89%E8%A3%9D-jQuery</link>
+    <guid>https://quartz.jzhao.xyz/Laravel-10-%E5%AE%89%E8%A3%9D-jQuery</guid>
+    <description><![CDATA[  沒辦法用 npm run dev 持續更新 js 檔。 如果要用 jQuery，建議回去用 Mix。請閱讀官方提供的文件 Migrating from Vite to Laravel Mix techvblogs.com/blog/how-to-install-jquery-in-laravel-10 Laravel Vite 使用 NPM 新增 JQuery 新增 jQuery 套件 npm install jquery # 或者 yarn add jquery 匯入 jQuery。修改 resources/js/bootstrap.js，加入以下這兩行，也就是新增 resolve: {.... ]]></description>
+    <pubDate>Fri, 24 Oct 2025 04:39:14 GMT</pubDate>
+  </item><item>
+    <title>讓 host 端存取虛擬環境中的 vite</title>
+    <link>https://quartz.jzhao.xyz/%E8%AE%93-host-%E7%AB%AF%E5%AD%98%E5%8F%96%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83%E4%B8%AD%E7%9A%84-vite</link>
+    <guid>https://quartz.jzhao.xyz/%E8%AE%93-host-%E7%AB%AF%E5%AD%98%E5%8F%96%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83%E4%B8%AD%E7%9A%84-vite</guid>
+    <description><![CDATA[ www.jianshu.com/p/b527dc3427fa 修改 vite.config.js export default defineConfig({ plugins: [ // ...省略 ], // 加上以下内容 server: { host: &#039;0.0.0.0&#039; } }) 這樣執行 npm run dev 後，會看到類似以下的結果 VITE v5.0.10 ready in 566 ms ➜ Local: http://localhost:5173/ ➜ Network: http://10.0.2.15:5173/ ➜ Network: http://192.... ]]></description>
+    <pubDate>Fri, 24 Oct 2025 04:29:59 GMT</pubDate>
+  </item><item>
+    <title>內向的人需要怎樣，工作效率最好？</title>
+    <link>https://quartz.jzhao.xyz/%E5%85%A7%E5%90%91%E7%9A%84%E4%BA%BA%E9%9C%80%E8%A6%81%E6%80%8E%E6%A8%A3%EF%BC%8C%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%9C%80%E5%A5%BD%EF%BC%9F</link>
+    <guid>https://quartz.jzhao.xyz/%E5%85%A7%E5%90%91%E7%9A%84%E4%BA%BA%E9%9C%80%E8%A6%81%E6%80%8E%E6%A8%A3%EF%BC%8C%E5%B7%A5%E4%BD%9C%E6%95%88%E7%8E%87%E6%9C%80%E5%A5%BD%EF%BC%9F</guid>
+    <description><![CDATA[  保持安靜：戴耳塞 有充足的睡眠：晚上十點睡到早上六點 安排休息時間和小窩來充電：安靜放空，什麼也不看、不聽，伸展肌肉，深呼吸 一次只做一、二件工作，深入研究直到做完：好好計畫，一步一步來 做自己喜歡的工作：畫畫、寫小說、寫程式(媒介是程式語言的藝術創作) 積極聆聽別人說話：內向者善於傾聽，而非說話 . ]]></description>
+    <pubDate>Fri, 24 Oct 2025 04:21:51 GMT</pubDate>
+  </item><item>
+    <title>建立與遵守檢查表的好處</title>
+    <link>https://quartz.jzhao.xyz/%E5%BB%BA%E7%AB%8B%E8%88%87%E9%81%B5%E5%AE%88%E6%AA%A2%E6%9F%A5%E8%A1%A8%E7%9A%84%E5%A5%BD%E8%99%95</link>
+    <guid>https://quartz.jzhao.xyz/%E5%BB%BA%E7%AB%8B%E8%88%87%E9%81%B5%E5%AE%88%E6%AA%A2%E6%9F%A5%E8%A1%A8%E7%9A%84%E5%A5%BD%E8%99%95</guid>
+    <description><![CDATA[ 盡可能建立與遵守檢查表，因為有許多好處： 檢查表把事情分得很細，所以有用 Vim 把事情分得很細提到的好處 運用原子習慣的「兩分鐘法則」，檢查表的開頭只要兩分鐘，然後你就會繼續做下去 照著檢查表完美的完成事情，感覺很好 做對一次，以後都能做對。不論再累，甚至感冒都能做對 節省腦力，有餘力兼顧多個工作（畫畫、運動、寫程式、做料理、讀小說） 針對每一條檢查表檢討並改進，不斷進步 在原子習慣這本書提到，英國自行車國家代表隊累積幾百個微小的改善，造就非凡成就。這麼多改善都會記得做嗎？ 英國自行車代表隊的改善包含： 重新設計單車坐墊，使其更為舒適：改變坐墊一次就行了，不需要記得 在輪胎上塗抹酒精，增加抓... ]]></description>
+    <pubDate>Fri, 24 Oct 2025 04:17:50 GMT</pubDate>
+  </item><item>
+    <title>Mac only 軟體</title>
+    <link>https://quartz.jzhao.xyz/Mac-only-%E8%BB%9F%E9%AB%94</link>
+    <guid>https://quartz.jzhao.xyz/Mac-only-%E8%BB%9F%E9%AB%94</guid>
+    <description><![CDATA[  Alfred 搜尋 Drafts 寫作工具 Fantastical 行事曆 ForkLift 檔案管理軟體 Paste 系統剪貼簿管理軟體 IINA 影片播放軟體 Bartender 狀態列圖示管理軟體 Dash 各種程式語言或 Framework 的文件下載回來，並在本機進行瀏覽和搜尋的工具 Google Gemini 結果 推薦 Mac 軟體 您好！很高興為您推薦一些 Mac 上非常實用且受歡迎的軟體。 由於您沒有說明特定的需求，我將從幾個常見的類別來提供建議，涵蓋效率、系統優化、影音處理等方面： 🍎 提升生產力與效率 軟體名稱主要功能備註Raycast / Alfred快速啟動器與效... ]]></description>
+    <pubDate>Fri, 24 Oct 2025 04:10:03 GMT</pubDate>
   </item><item>
     <title>使用 docker 執行 node.js，問 AI 語法</title>
     <link>https://quartz.jzhao.xyz/%E4%BD%BF%E7%94%A8-docker-%E5%9F%B7%E8%A1%8C-node.js</link>
@@ -21,7 +57,7 @@
     <title>時間管理方法</title>
     <link>https://quartz.jzhao.xyz/%E6%99%82%E9%96%93%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95</link>
     <guid>https://quartz.jzhao.xyz/%E6%99%82%E9%96%93%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95</guid>
-    <description><![CDATA[ 一、記錄做了什麼和花了多少時間 參考柳比歇夫時間管理法。我覺得他這個方法其實是在記錄心流時間，所以只記錄重要的工作耗費多久，沒有記錄吃飯、洗澡或午睡，雖然這些時間花費 8 小時（一天 24 小時減掉工作 6 小時和睡覺 10 小時，剩下 8 小時）。 二、保持好奇心 人類天生好奇，好奇心會引導你探索與學習一切，它是最強的動機。神奇的是，很快你會覺得 YouTube、臉書、新聞、Netflix 其實很無聊。內心深處真正想做的事情會浮現。. ]]></description>
+    <description><![CDATA[ 一、記錄做了什麼和花了多少時間 參考柳比歇夫時間管理法。我覺得他這個方法其實是在記錄心流時間，所以只記錄重要的工作耗費多久，沒有記錄吃飯、洗澡或午睡，雖然這些時間花費 8 小時（一天 24 小時減掉工作 6 小時和睡覺 10 小時，剩下 8 小時）。 二、保持好奇心 人類天生好奇，好奇心會引導你探索與學習一切，它是最強的動機。神奇的是，很快你會覺得 YouTube、臉書、新聞、Netflix 其實很無聊。內心深處真正想做的事情會浮現。 哪種時間管理 方法最有效？不花你太多時間的那種！ 是不是總覺得事情好多，怎麼都忙不完？想要學習一套好的時間管理方法，卻總是無法落實。 Bryan 其實也跟大家一... ]]></description>
     <pubDate>Sun, 06 Jul 2025 00:00:00 GMT</pubDate>
   </item><item>
     <title>Git 設定</title>
@@ -29,42 +65,6 @@
     <guid>https://quartz.jzhao.xyz/Git-%E8%A8%AD%E5%AE%9A</guid>
     <description><![CDATA[ 使用 Neovim 編輯 commit 訊息，不套用 init.lua 設定，速度快 git config --global core.editor &#039;nvim -u NONE -N&#039; 強制每個 Git Repository 都要設定使用者資訊 git config --global user.useConfigOnly true git config --global --unset user.name git config --global --unset user.email git config --global --unset user.signingkey 不允... ]]></description>
     <pubDate>Thu, 27 Mar 2025 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>用 Linux Mint 做為工作環境</title>
-    <link>https://quartz.jzhao.xyz/%E7%94%A8-Linux-Mint-%E5%81%9A%E7%82%BA%E5%B7%A5%E4%BD%9C%E7%92%B0%E5%A2%83</link>
-    <guid>https://quartz.jzhao.xyz/%E7%94%A8-Linux-Mint-%E5%81%9A%E7%82%BA%E5%B7%A5%E4%BD%9C%E7%92%B0%E5%A2%83</guid>
-    <description><![CDATA[ 之前用 Windows 10，但是現在又改回用 Linux Mint，因為有一些缺點讓我無法忍受： 只要停下來幾分鐘不用電腦，就自動開始下載檔案並更新系統，搞得 CPU 和磁碟滿載，而且還一直安裝失敗。即使設定手動安裝 Windows Update，也還是一樣。 Docker 啟動很慢，即使是啟動 Docker 本身就大約需要 4 分多鐘，還要吃掉 WSL 需要的 2GB 記憶體。 雖然有用 ClearType，字型還是很醜。我需要在瀏覽器同一頁上顯示繁體中文、簡體中文、日文和韓文，但是 Windows 10 設定用 Noto 字型，只能套用一種字型，結果就是簡體中文仍然是鋸齒狀的字，只能用新... ]]></description>
-    <pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>用 Vim 把事情分得很細</title>
-    <link>https://quartz.jzhao.xyz/%E7%94%A8-Vim-%E6%8A%8A%E4%BA%8B%E6%83%85%E5%88%86%E5%BE%97%E5%BE%88%E7%B4%B0</link>
-    <guid>https://quartz.jzhao.xyz/%E7%94%A8-Vim-%E6%8A%8A%E4%BA%8B%E6%83%85%E5%88%86%E5%BE%97%E5%BE%88%E7%B4%B0</guid>
-    <description><![CDATA[ 在「內向心理學」這本書(P. ]]></description>
-    <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>memos 安裝到 Debian 9</title>
-    <link>https://quartz.jzhao.xyz/memos-%E5%AE%89%E8%A3%9D%E5%88%B0-Debian-9</link>
-    <guid>https://quartz.jzhao.xyz/memos-%E5%AE%89%E8%A3%9D%E5%88%B0-Debian-9</guid>
-    <description><![CDATA[ memos 官網文件只有寫怎麼用 Docker 安裝，但是產生的 SQlite 檔案是 root 權限，所以試著編譯原始碼產生執行檔 # 安裝 Node.js sudo apt install curl build-essential curl -sL deb.nodesource.com/setup_20.x | sudo bash - sudo apt install nodejs node -v npm -v cd /tmp git clone github.com/usememos/memos.git cd memos/web sudo corepack enable 輸入 Y 和 E... ]]></description>
-    <pubDate>Fri, 03 Jan 2025 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>有興趣但是還沒研究的東西</title>
-    <link>https://quartz.jzhao.xyz/%E6%9C%89%E8%88%88%E8%B6%A3%E4%BD%86%E6%98%AF%E9%82%84%E6%B2%92%E7%A0%94%E7%A9%B6%E7%9A%84%E6%9D%B1%E8%A5%BF</link>
-    <guid>https://quartz.jzhao.xyz/%E6%9C%89%E8%88%88%E8%B6%A3%E4%BD%86%E6%98%AF%E9%82%84%E6%B2%92%E7%A0%94%E7%A9%B6%E7%9A%84%E6%9D%B1%E8%A5%BF</guid>
-    <description><![CDATA[ Zen Browser - 類似 Arc 瀏覽器，但是使用 Firefox Gecko engine 的開放原始碼瀏覽器 blog.gslin.org/archives/2024/08/28/11951/%e6%b8%ac%e8%a9%a6-zen-browser/ Zen Browser使用心得，界面漂亮沉著、靜默提昇生產力的瀏覽器 docs.zen-browser.app/benchmarks Speedometer 3.0 出現的 Librewolf 似乎更好？ 糾結了很久 Chrome 和 Arc，最終選擇了 Librewolf Librewolf 是一款基於 Mozilla Fire... ]]></description>
-    <pubDate>Fri, 03 Jan 2025 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Windows 10 推薦軟體</title>
-    <link>https://quartz.jzhao.xyz/Windows-10-%E6%8E%A8%E8%96%A6%E8%BB%9F%E9%AB%94</link>
-    <guid>https://quartz.jzhao.xyz/Windows-10-%E6%8E%A8%E8%96%A6%E8%BB%9F%E9%AB%94</guid>
-    <description><![CDATA[ 影片播放 Linux 我用 mpv 播放影片，Windows 10 也能用 mpv ，用 scoop 安裝1，不過需要用指令 mpv，所以推薦用 mpv-hero，啟動速度快，還多了許多功能，例如右鍵選單、實用的圖形界面、和 YouTube 一樣的影片預覽、最近播放清單 只是安裝有點麻煩： 在 Releases 下載壓縮檔 在 home 目錄新增 apps 資料夾，解壓縮到裡面。因為安裝後會固定尋找當初安裝的路徑，所以放在 apps 執行資料夾 installer 的 mpv-install.bat ，需要用系統管理員權限，所以右鍵 Run as administrator。如果沒有，可能是設... ]]></description>
-    <pubDate>Thu, 26 Dec 2024 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>解決 VTE 為基礎的終端機程式游標問題</title>
-    <link>https://quartz.jzhao.xyz/%E8%A7%A3%E6%B1%BA-VTE-%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E7%B5%82%E7%AB%AF%E6%A9%9F%E7%A8%8B%E5%BC%8F%E6%B8%B8%E6%A8%99%E5%95%8F%E9%A1%8C</link>
-    <guid>https://quartz.jzhao.xyz/%E8%A7%A3%E6%B1%BA-VTE-%E7%82%BA%E5%9F%BA%E7%A4%8E%E7%9A%84%E7%B5%82%E7%AB%AF%E6%A9%9F%E7%A8%8B%E5%BC%8F%E6%B8%B8%E6%A8%99%E5%95%8F%E9%A1%8C</guid>
-    <description><![CDATA[ 這幾天改用 Windows 10，用 VirtualBox 建立 Alpine Linux 虛擬環境，用來跑 docker。其中用 ssh 連到 Linux，再用 Vim 編輯檔案，結果發現游標不是我習慣的那樣。正常情況下，在 normal 模式，游標會選取字元並反白，按 i 會進入 insert 模式，字元不再選取，| 游標會在左邊，然後可以開始輸入，如果按 a 則 | 游標會在右邊。但是現在卻變成不管是哪個模式，游標都一樣，例如全部都是 |，即使是 normal 模式。Neovim 則無此問題。 Google 後發現 Vim 用以下的設定就能恢復正常，其中最後三行的 set 讓游標切換沒有... ]]></description>
-    <pubDate>Wed, 27 Nov 2024 00:00:00 GMT</pubDate>
   </item>
     </channel>
   </rss>
