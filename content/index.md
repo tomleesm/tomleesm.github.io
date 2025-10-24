@@ -34,6 +34,7 @@ title: wiki
 - [[Laravel 10 官方文件筆記，邊說邊打字]]
 - [[讓 host 端存取虛擬環境中的 vite]]
 - [[Laravel 10 安裝 jQuery]]
+- [[Fibonacci 數列快取版本]]
 
 ## 其它
 
@@ -52,3 +53,4 @@ title: wiki
 - [[建立與遵守檢查表的好處]]
 - [[Mac only 軟體]]
 - [[內向的人需要怎樣，工作效率最好？]]
+- [[為什麼寫 wiki？]]
