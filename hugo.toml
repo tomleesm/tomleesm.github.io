@@ -39,7 +39,7 @@ defaultContentLanguage = "zh-cn"
   # Setting it to 'auto' applies the color scheme based on the visitor's device color preference.If you don't specify anything, ignore this parameter, or leave it blank,
   # the default value is set to 'auto'.
   # You can take a look at layouts/index.html for more information.
-  description = "C#, Unity, Photoshop 與遊戲設計"
+  description = "程式設計, 美術設計和其它有的沒的"
   mainSections = ['posts']
   toc = false # set to false to disable table of contents 'globally'
   tocOpen = true # set to true to open table of contents by default
@@ -61,7 +61,7 @@ defaultContentLanguage = "zh-cn"
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Tom 除錯中"
   name = "Tom"
-  description = "C#, Unity, Photoshop 與遊戲設計"
+  description = "程式設計, 美術設計和其它有的沒的"
 
 # Allow to override webmanifest options
 [Languages.zh-cn.params.webmanifest]
