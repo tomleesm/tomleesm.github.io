@@ -61,7 +61,7 @@ defaultContentLanguage = "zh-cn"
   # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
   intro = "Tom 除錯中"
   name = "Tom"
-  description = "C#, Unity, PhotoShop 與遊戲設計"
+  description = "C#, Unity, Photoshop 與遊戲設計"
 
 # Allow to override webmanifest options
 [Languages.zh-cn.params.webmanifest]
