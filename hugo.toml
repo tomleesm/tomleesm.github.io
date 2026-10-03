@@ -109,3 +109,8 @@ url = "/index.xml"
 [[params.socialIcons]]
 name = "facebook"
 url = "https://www.facebook.com/"
+
+# set the location of the image cache to the [cacheDir](https://gohugo.io/configuration/all/#cachedir)
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
