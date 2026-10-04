@@ -3,6 +3,7 @@ title: 常用 Vim 指令清單
 date: 2024-04-17T17:50:21+08:00
 draft: false
 toc: true
+tags: ['Vim', 'cheatsheets']
 ---
 
 以下為「Vim 實用技巧」的筆記。Vim 指令實在很多，所以寫份清單方便查詢

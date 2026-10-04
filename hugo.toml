@@ -33,6 +33,11 @@ defaultContentLanguage = "zh-cn"
     name = '關於'
     url = '/pages/about/'
     weight = 30
+  [[Languages.zh-cn.menu.main]]
+    pageRef="tags"
+    name = '標籤'
+    url = '/tags/'
+    weight = 40
 [Languages.zh-cn.params]
   sitename = "Tom 除錯中"
   defaultColor = "dark" # set color mode: dark, light, auto
