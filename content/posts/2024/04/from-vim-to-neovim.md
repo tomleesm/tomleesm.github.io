@@ -48,7 +48,7 @@ source /root/.bash_profile
 
 1. 在 host 端，連到 [Nerd Fonts](https://www.nerdfonts.com/font-downloads) ，搜尋 Symbols Only，點選 Symbols Nerd Font
 2. 解壓縮後，滑鼠點兩下打開 SymbolsNerdFont-Regular.ttf 檔案，按右上方按鈕 install
-3. [設定終端機使用這個字型](https://github.com/tomleesm/blog/issues/22)
+3. [設定終端機使用這個字型](/posts/2024/11/windows-terminal-setup-fonts/)
 
 下方狀態列設定 [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) 時突然覺得如果最右邊顯示時間到秒數，看著時間一分一秒的跳動，對於（工作時）把握時間寫程式應該會很有幫助，在 [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)  搜尋 datetime，找到以下的 Lua 程式碼
 
